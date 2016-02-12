@@ -1,0 +1,46 @@
+<?php
+
+
+namespace DockerCloud\API;
+
+
+use DockerCloud\Exception;
+use DockerCloud\Model\AbstractApplicationModel;
+
+/**
+ * Class AbstractApplicationAPI
+ *
+ * @package DockerCloud\API
+ * @method AbstractApplicationModel getByUri($uri)
+ */
+abstract class AbstractApplicationAPI extends AbstractAPI
+{
+    protected $api_prifix = '/api/app/v1';
+
+    /**
+     * @param AbstractApplicationModel $Model
+     * @param                          $state
+     * @param int                      $sleepTime
+     * @param int                      $timeOut
+     *
+     * @return AbstractApplicationModel
+     * @throws Exception
+     */
+    public function waitForState(AbstractApplicationModel $Model, $state, $sleepTime = 10, $timeOut = 600)
+    {
+        $timer = 0;
+        $Model = $this->getByUri($Model->getResourceUri());
+        while ($state != $Model->getState()) {
+            if ($timer >= $timeOut) {
+                throw new Exception(sprintf('Waited resource [%s] to be in state [%s] timed out [%s seconds].'
+                    , $Model->getResourceUri(), $state, $timer));
+            }
+            sleep($sleepTime);
+            $timer += $sleepTime;
+            $Model = $this->getByUri($Model->getResourceUri());
+        }
+        return $Model;
+    }
+
+
+}

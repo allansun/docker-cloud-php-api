@@ -1,0 +1,44 @@
+{
+  "name": "allansun/docker-cloud-php-api",
+  "description": "A PHP Wrapper for DockerCloud API",
+  "type": "library",
+  "keywords": [
+    "docker-cloud",
+    "docker",
+    "api",
+    "dockercloud"
+  ],
+  "minimum-stability": "stable",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Allan Sun",
+      "email": "allan.sun@bricre.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.5",
+    "guzzlehttp/guzzle": "~6.0",
+    "monolog/monolog": "@stable",
+    "mattketmo/camel": "@stable",
+    "zendframework/zend-hydrator": "~2",
+    "zendframework/zend-filter": "~2",
+    "zendframework/zend-servicemanager": "~2",
+    "zendframework/zend-serializer": "~2",
+    "zendframework/zend-eventmanager": "~2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.0",
+    "fzaninotto/Faker": "@stable"
+  },
+  "autoload": {
+    "psr-4": {
+      "DockerCloud\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "DockerCloud\\Test\\": "test"
+    }
+  }
+}
