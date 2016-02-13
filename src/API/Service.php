@@ -18,17 +18,6 @@ class Service extends AbstractApplicationAPI
     ];
 
     /**
-     * @param $uri
-     *
-     * @return Model
-     * @throws \DockerCloud\Exception
-     */
-    function getByUri($uri)
-    {
-        return new Model($this->getClient()->request('GET', $uri));
-    }
-
-    /**
      * @param Model $Model
      *
      * @return Model
@@ -63,6 +52,17 @@ class Service extends AbstractApplicationAPI
                 ])
             ]
         ));
+    }
+
+    /**
+     * @param $uri
+     *
+     * @return Model
+     * @throws \DockerCloud\Exception
+     */
+    function getByUri($uri)
+    {
+        return new Model($this->getClient()->request('GET', $uri));
     }
 
     /**
