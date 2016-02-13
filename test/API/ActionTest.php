@@ -4,10 +4,10 @@
 namespace DockerCloud\Test\API;
 
 
-use DockerCloud\API\Node as API;
-use DockerCloud\Model\Node as Model;
+use DockerCloud\API\Action as API;
+use DockerCloud\Model\Action as Model;
 
-class NodeTest extends AbstractAPITest
+class ActionTest extends AbstractAPITest
 {
     /**
      * @return string
@@ -15,22 +15,22 @@ class NodeTest extends AbstractAPITest
     static public function getMockData()
     {
         return '{
-        "availability_zones": [],
-        "available": true,
-        "label": "1GB",
-        "name": "1gb",
-        "provider": "/api/infra/v1/provider/digitalocean/",
-        "regions": [
-            "/api/infra/v1/region/digitalocean/ams1/",
-            "/api/infra/v1/region/digitalocean/sfo1/",
-            "/api/infra/v1/region/digitalocean/nyc2/",
-            "/api/infra/v1/region/digitalocean/ams2/",
-            "/api/infra/v1/region/digitalocean/sgp1/",
-            "/api/infra/v1/region/digitalocean/lon1/",
-            "/api/infra/v1/region/digitalocean/nyc3/",
-            "/api/infra/v1/region/digitalocean/nyc1/"
-        ],
-        "resource_uri": "/api/infra/v1/nodetype/digitalocean/1gb/"
+            "action": "Cluster Create",
+            "body": "{\"image\": \"tutum/ubuntu-quantal:latest/\", \"name\": \"test_cluster\"}",
+            "end_date": "Wed, 17 Sep 2014 08:26:22 +0000",
+            "ip": "56.78.90.12",
+            "is_user_action": true,
+            "can_be_canceled": false,
+            "location": "New York, USA",
+            "method": "POST",
+            "object": "/api/infra/v1/cluster/eea638f4-b77a-4183-b241-22dbd7866f22/",
+            "path": "/api/infra/v1/cluster/",
+            "resource_uri": "/api/audit/v1/action/6246c558-976c-4df6-ba60-eb1a344a17af/",
+            "start_date": "Wed, 17 Sep 2014 08:26:22 +0000",
+            "state": "Success",
+            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko)
+            Version/7.0.6 Safari/537.78.2",
+            "uuid": "6246c558-976c-4df6-ba60-eb1a344a17af"
         }';
     }
 
@@ -79,32 +79,18 @@ class NodeTest extends AbstractAPITest
         $this->assertInstanceOf(Model::class, $Model);
     }
 
-    /**
-     * @param Model $Model
-     *
-     * @depends testGetList
-     */
-    public function testUpdate(Model $Model)
-    {
-        $this->mockResponse(200, $this->getMockData());
-
-        $API = new API();
-        $Model->setTags(['unit-test-update']);
-        $Model = $API->update($Model);
-        $this->assertInstanceOf(Model::class, $Model);
-    }
 
     /**
      * @param Model $Model
      *
      * @depends testGetList
      */
-    public function testDockerUpgrade(Model $Model)
+    public function testCancel(Model $Model)
     {
         $this->mockResponse(200, $this->getMockData());
 
         $API   = new API();
-        $Model = $API->dockerUpgrade($Model->getUuid());
+        $Model = $API->cancel($Model->getUuid());
         $this->assertInstanceOf(Model::class, $Model);
     }
 
@@ -113,26 +99,13 @@ class NodeTest extends AbstractAPITest
      *
      * @depends testGetList
      */
-    public function testHealthCheck(Model $Model)
+    public function testRetry(Model $Model)
     {
         $this->mockResponse(200, $this->getMockData());
 
         $API   = new API();
-        $Model = $API->healthCheck($Model->getUuid());
+        $Model = $API->retry($Model->getUuid());
         $this->assertInstanceOf(Model::class, $Model);
     }
 
-    /**
-     * @param Model $Model
-     *
-     * @depends testGetList
-     */
-    public function testTerminate(Model $Model)
-    {
-        $this->mockResponse(200, $this->getMockData());
-
-        $API   = new API();
-        $Model = $API->terminate($Model->getUuid());
-        $this->assertInstanceOf(Model::class, $Model);
-    }
 }
