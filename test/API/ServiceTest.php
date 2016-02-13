@@ -277,6 +277,21 @@ class ServiceTest extends AbstractAPITest
     /**
      * @param Model $Model
      *
+     * @depends testCreate
+     */
+    public function testUpdate(Model $Model)
+    {
+        $this->mockResponse(200, $this->getMockData());
+
+        $API = new API();
+        $Model->setTags(['unit-test-update']);
+        $Model = $API->update($Model);
+        $this->assertInstanceOf(Model::class, $Model);
+    }
+
+    /**
+     * @param Model $Model
+     *
      * @depends testGetList
      */
     public function testStop(Model $Model)
@@ -319,7 +334,6 @@ class ServiceTest extends AbstractAPITest
         $Model = $API->redeploy($Model->getUuid());
         $this->assertInstanceOf(Model::class, $Model);
     }
-
 
     /**
      * @param Model $Model

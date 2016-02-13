@@ -114,7 +114,7 @@ class Client
         if (self::$instance instanceof Client) {
             return self::$instance;
         } else {
-            throw new \Exception("Must run Client::configure() first!");
+            throw new Exception("Must run Client::configure() first!");
         }
     }
 

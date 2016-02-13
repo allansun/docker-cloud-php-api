@@ -6,7 +6,7 @@ namespace DockerCloud\Model\Service;
 
 use DockerCloud\Model\AbstractModel;
 
-class Related extends AbstractModel
+class Link extends AbstractModel
 {
     /**
      * The link name

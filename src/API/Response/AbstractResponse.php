@@ -6,7 +6,7 @@ namespace DockerCloud\API\Response;
 
 use DockerCloud\Exception;
 
-class AbstractResponse
+abstract class AbstractResponse
 {
     /**
      * @var \StdClass
@@ -18,7 +18,7 @@ class AbstractResponse
         if (is_object($json)) {
             $this->response = $json;
         } elseif (is_string($json)) {
-            $this->response = json_encode($json);
+            $this->response = json_decode($json);
         } else {
             throw new Exception('Unknown Response');
         }

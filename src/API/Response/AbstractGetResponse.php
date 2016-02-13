@@ -6,7 +6,7 @@ namespace DockerCloud\API\Response;
 
 use DockerCloud\Model\Common\ResponseMetaData;
 
-class AbstractGetResponse extends AbstractResponse
+abstract class AbstractGetResponse extends AbstractResponse
 {
     /**
      * @var ResponseMetaData

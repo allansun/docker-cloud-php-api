@@ -65,14 +65,14 @@ abstract class AbstractAPI
      *
      * @throws Exception
      */
-    protected function validateFilter($filters = [], $allowedFilters = null)
+    public function validateFilter($filters = [], $allowedFilters = null)
     {
         if (!$allowedFilters) {
             $allowedFilters = $this->allowedGetListFilters;
         }
         foreach ($filters as $key => $value) {
             if (!in_array($key, $allowedFilters)) {
-                throw new Exception(sprintf('[%s] is not an allowed filter.'));
+                throw new Exception(sprintf('[%s] is not an allowed filter.', $key));
             }
         }
     }

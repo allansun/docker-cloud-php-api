@@ -17,10 +17,17 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
         Client::configure(getenv('USERNAME'), getenv('APIKEY'));
     }
 
+    /**
+     * @param $status
+     * @param $body
+     *
+     * @return $this
+     * @throws \Exception
+     */
     protected function mockResponse($status, $body)
     {
         if ($body instanceof AbstractModel) {
-            $body = $body->jsonSerialize();
+            $body = json_encode($body->getArrayCopy());
         }
 
         if (!is_string($body)) {
@@ -36,6 +43,12 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
         return $this;
     }
 
+    /**
+     * @param $status
+     * @param $body
+     *
+     * @return AbstractAPITest
+     */
     protected function mockGetListResponse($status, $body)
     {
         if (is_string($body)) {
@@ -44,7 +57,7 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
         if ($body instanceof AbstractModel) {
             $body = $body->getArrayCopy();
         }
-        if(!is_array($body)){
+        if (!is_array($body)) {
             $body = [$body];
         }
 
@@ -56,5 +69,20 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
             'meta'    => $MetaData->getArrayCopy(),
             'objects' => $body
         ]));
+    }
+
+    /**
+     * @param Response[] $responses
+     *
+     * @return $this
+     * @throws \Exception
+     */
+    protected function mockResponses($responses)
+    {
+        Client::getInstance()->setDefaultOption('handler',
+            HandlerStack::create(new MockHandler($responses))
+        );
+
+        return $this;
     }
 }

@@ -7,7 +7,7 @@ namespace DockerCloud\Model;
 use DockerCloud\Model\Service\Binding;
 use DockerCloud\Model\Service\EnvironmentVariable;
 use DockerCloud\Model\Service\Port;
-use DockerCloud\Model\Service\Related;
+use DockerCloud\Model\Service\Link;
 
 class Service extends AbstractApplicationModel
 {
@@ -357,14 +357,14 @@ class Service extends AbstractApplicationModel
     /**
      * A list of services that are linked to this one
      *
-     * @var Related[]
+     * @var Link[]
      */
     protected $linked_from_service = [];
 
     /**
      * A list of services that the service is linked to
      *
-     * @var Related[]
+     * @var Link[]
      */
     protected $linked_to_service = [];
 
@@ -1346,7 +1346,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @return Related[]
+     * @return Link[]
      */
     public function getLinkedFromService()
     {
@@ -1354,7 +1354,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @param Related[] $linked_from_services
+     * @param Link[] $linked_from_services
      *
      * @return $this
      */
@@ -1362,8 +1362,8 @@ class Service extends AbstractApplicationModel
     {
         $data = [];
         foreach ($linked_from_services as $linked_from_service) {
-            if (!($linked_from_service instanceof Related)) {
-                $linked_from_service = new Related($linked_from_service);
+            if (!($linked_from_service instanceof Link)) {
+                $linked_from_service = new Link($linked_from_service);
             }
             $data[] = $linked_from_service;
         }
@@ -1374,7 +1374,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @return Related[]
+     * @return Link[]
      */
     public function getLinkedToService()
     {
@@ -1382,7 +1382,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @param Related[] $linked_to_services
+     * @param Link[] $linked_to_services
      *
      * @return $this
      */
@@ -1390,8 +1390,8 @@ class Service extends AbstractApplicationModel
     {
         $data = [];
         foreach ($linked_to_services as $linked_to_service) {
-            if (!($linked_to_service instanceof Related)) {
-                $linked_to_service = new Related($linked_to_service);
+            if (!($linked_to_service instanceof Link)) {
+                $linked_to_service = new Link($linked_to_service);
             }
             $data[] = $linked_to_service;
         }

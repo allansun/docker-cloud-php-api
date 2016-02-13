@@ -95,6 +95,77 @@ class StackTest extends AbstractAPITest
     /**
      * @param Model $Model
      *
+     * @depends testGetList
+     */
+    public function testStart(Model $Model)
+    {
+        $this->mockResponse(200, $this->getMockData());
+
+        $API   = new API();
+        $Model = $API->start($Model->getUuid());
+        $this->assertInstanceOf(Model::class, $Model);
+    }
+
+    /**
+     * @param Model $Model
+     *
+     * @depends testCreate
+     */
+    public function testUpdate(Model $Model)
+    {
+        $this->mockResponse(200, $this->getMockData());
+
+        $API = new API();
+        $Model->setServices([ServiceTest::getMockData()]);
+        $Model = $API->update($Model);
+        $this->assertInstanceOf(Model::class, $Model);
+    }
+
+    /**
+     * @param Model $Model
+     *
+     * @depends testGetList
+     */
+    public function testStop(Model $Model)
+    {
+        $this->mockResponse(200, $this->getMockData());
+
+        $API   = new API();
+        $Model = $API->stop($Model->getUuid());
+        $this->assertInstanceOf(Model::class, $Model);
+    }
+
+    /**
+     * @param Model $Model
+     *
+     * @depends testGetList
+     */
+    public function testRedeploy(Model $Model)
+    {
+        $this->mockResponse(200, $this->getMockData());
+
+        $API   = new API();
+        $Model = $API->redeploy($Model->getUuid());
+        $this->assertInstanceOf(Model::class, $Model);
+    }
+
+    /**
+     * @param Model $Model
+     *
+     * @depends testGetList
+     */
+    public function testExport(Model $Model)
+    {
+        $this->mockResponse(200, $this->getMockData());
+
+        $API   = new API();
+        $Model = $API->export($Model->getUuid());
+        $this->assertInternalType('string', $Model);
+    }
+
+    /**
+     * @param Model $Model
+     *
      * @depends testCreate
      */
     public function testTerminate(Model $Model)
