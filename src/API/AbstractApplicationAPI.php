@@ -11,7 +11,6 @@ use DockerCloud\Model\AbstractApplicationModel;
  * Class AbstractApplicationAPI
  *
  * @package DockerCloud\API
- * @method AbstractApplicationModel getByUri($uri)
  */
 abstract class AbstractApplicationAPI extends AbstractAPI
 {
@@ -42,5 +41,10 @@ abstract class AbstractApplicationAPI extends AbstractAPI
         return $Model;
     }
 
-
+    /**
+     * @param $uri
+     *
+     * @return AbstractApplicationModel
+     */
+    abstract function getByUri($uri);
 }

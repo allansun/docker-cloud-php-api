@@ -47,13 +47,6 @@ abstract class AbstractAPI
     }
 
     /**
-     * @param $uri
-     *
-     * @return AbstractModel
-     */
-    abstract function getByUri($uri);
-
-    /**
      * @param array $filters
      *
      * @return AbstractGetResponse
