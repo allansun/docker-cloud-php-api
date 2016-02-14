@@ -14,14 +14,16 @@ class RegistryTest extends AbstractAPITest
      */
     static public function getMockData()
     {
-        return '{
-            "host": "registry-1.docker.io",
-            "is_docker_registry": true,
-            "is_ssl": true,
-            "name": "Docker Hub",
-            "port": 443,
-            "resource_uri": "/api/repo/v1/registry/registry-1.docker.io/",
-        }';
+        return <<<JSON
+{
+    "host": "registry-1.docker.io",
+    "is_docker_registry": true,
+    "is_ssl": true,
+    "name": "Docker Hub",
+    "port": 443,
+    "resource_uri": "/api/repo/v1/registry/registry-1.docker.io/"
+}
+JSON;
     }
 
     /**

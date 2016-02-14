@@ -15,12 +15,14 @@ class RepositoryTest extends AbstractAPITest
      */
     static public function getMockData()
     {
-        return '{
-            "in_use": false,
-            "name": "quay.io/tutum/ubuntu",
-            "registry": "/api/repo/v1/registry/quay.io/",
-            "resource_uri": "/api/repo/v1/repository/quay.io/tutum/ubuntu/",
-        }';
+        return <<<JSON
+{
+    "in_use": false,
+    "name": "quay.io/tutum/ubuntu",
+    "registry": "/api/repo/v1/registry/quay.io/",
+    "resource_uri": "/api/repo/v1/repository/quay.io/tutum/ubuntu/"
+}
+JSON;
     }
 
     public function testCreate()

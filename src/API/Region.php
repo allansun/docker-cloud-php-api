@@ -3,8 +3,8 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\RegionGetListResponse as GetListResponse;
 use DockerCloud\Model\Region as Model;
+use DockerCloud\Model\Response\RegionGetListResponse as GetListResponse;
 
 class Region extends AbstractInfrastructrueAPI
 {

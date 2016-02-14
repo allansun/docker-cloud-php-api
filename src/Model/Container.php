@@ -167,7 +167,7 @@ class Container extends AbstractApplicationModel
     /**
      * Metadata in form of dictionary used for every container of this container
      *
-     * @var \ArrayObject
+     * @var \StdClass
      */
     protected $labels;
 
@@ -244,7 +244,7 @@ class Container extends AbstractApplicationModel
     /**
      * Added capabilities for containers of this container
      *
-     * @var string
+     * @var string[]
      */
     protected $cap_add;
 
@@ -274,7 +274,7 @@ class Container extends AbstractApplicationModel
      *
      * @var string[]
      */
-    protected $secuirty_opt;
+    protected $security_opt;
 
     /**
      * Entrypoint to be set on the containers launched as part of the container,
@@ -368,7 +368,7 @@ class Container extends AbstractApplicationModel
     /**
      * List of environment variables that would be exposed in the containers if they are linked to this container
      *
-     * @var \ArrayObject
+     * @var \StdClass
      */
     protected $link_variables;
 
@@ -795,7 +795,7 @@ class Container extends AbstractApplicationModel
     }
 
     /**
-     * @return \ArrayObject
+     * @return \StdClass
      */
     public function getLabels()
     {
@@ -803,7 +803,7 @@ class Container extends AbstractApplicationModel
     }
 
     /**
-     * @param \ArrayObject $labels
+     * @param \StdClass $labels
      *
      * @return $this
      */
@@ -1015,7 +1015,7 @@ class Container extends AbstractApplicationModel
     }
 
     /**
-     * @return string
+     * @return string[]
      */
     public function getCapAdd()
     {
@@ -1023,7 +1023,7 @@ class Container extends AbstractApplicationModel
     }
 
     /**
-     * @param string $cap_add
+     * @param string[] $cap_add
      *
      * @return $this
      */
@@ -1097,19 +1097,19 @@ class Container extends AbstractApplicationModel
     /**
      * @return \string[]
      */
-    public function getSecuirtyOpt()
+    public function getSecurityOpt()
     {
-        return $this->secuirty_opt;
+        return $this->security_opt;
     }
 
     /**
-     * @param \string[] $secuirty_opt
+     * @param \string[] $security_opt
      *
      * @return $this
      */
-    public function setSecuirtyOpt($secuirty_opt)
+    public function setSecurityOpt($security_opt)
     {
-        $this->secuirty_opt = $secuirty_opt;
+        $this->security_opt = $security_opt;
 
         return $this;
     }
@@ -1367,7 +1367,7 @@ class Container extends AbstractApplicationModel
     }
 
     /**
-     * @return \ArrayObject
+     * @return \StdClass
      */
     public function getLinkVariables()
     {
@@ -1375,7 +1375,7 @@ class Container extends AbstractApplicationModel
     }
 
     /**
-     * @param \ArrayObject $link_variables
+     * @param \StdClass $link_variables
      *
      * @return $this
      */

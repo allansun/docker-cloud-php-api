@@ -19,7 +19,7 @@ class Binding extends AbstractModel
      *
      * @var string
      */
-    protected $container_parth;
+    protected $container_path;
 
     /**
      * true is the volume has writable permissions
@@ -58,19 +58,19 @@ class Binding extends AbstractModel
     /**
      * @return string
      */
-    public function getContainerParth()
+    public function getContainerPath()
     {
-        return $this->container_parth;
+        return $this->container_path;
     }
 
     /**
-     * @param string $container_parth
+     * @param string $container_path
      *
      * @return $this
      */
-    public function setContainerParth($container_parth)
+    public function setContainerPath($container_path)
     {
-        $this->container_parth = $container_parth;
+        $this->container_path = $container_path;
 
         return $this;
     }

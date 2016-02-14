@@ -1,11 +1,11 @@
 <?php
 
 
-namespace DockerCloud\Test\API\Response;
+namespace DockerCloud\Test\Model\Response;
 
 
-use DockerCloud\API\Response\AbstractResponse;
 use DockerCloud\Exception;
+use DockerCloud\Model\Response\AbstractResponse;
 use DockerCloud\Test\API\AbstractAPITest;
 
 class RealAbstractResponse extends AbstractAPITest

@@ -3,8 +3,8 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\RepositoryGetListResponse as GetListResponse;
 use DockerCloud\Model\Repository as Model;
+use DockerCloud\Model\Response\RepositoryGetListResponse as GetListResponse;
 
 class Repository extends AbstractRepoAPI
 {

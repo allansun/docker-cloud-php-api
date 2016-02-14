@@ -1,12 +1,12 @@
 <?php
 
 
-namespace DockerCloud\API\Response;
+namespace DockerCloud\Model\Response;
 
 
-use DockerCloud\Model\Action as Model;
+use DockerCloud\Model\Registry as Model;
 
-class ActionGetListResponse extends AbstractGetResponse
+class RegistryGetListResponse extends AbstractGetResponse
 {
     /**
      * @var Model[]

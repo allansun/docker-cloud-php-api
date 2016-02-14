@@ -1,12 +1,12 @@
 <?php
 
 
-namespace DockerCloud\API\Response;
+namespace DockerCloud\Model\Response;
 
 
-use DockerCloud\Model\Stack as Model;
+use DockerCloud\Model\ServiceTrigger as Model;
 
-class StackGetListResponse extends AbstractGetResponse
+class ServiceTriggerGetListResponse extends AbstractGetResponse
 {
     /**
      * @var Model[]

@@ -3,7 +3,7 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\ServiceTriggerGetListResponse as GetListResponse;
+use DockerCloud\Model\Response\ServiceTriggerGetListResponse as GetListResponse;
 use DockerCloud\Model\ServiceTrigger as Model;
 
 class ServiceTrigger extends AbstractAPI

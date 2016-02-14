@@ -107,7 +107,7 @@ class Action extends AbstractAuditModel
     /**
      * If the action has been triggered by the user
      *
-     * @var string
+     * @var bool
      */
     protected $is_user_action;
 
@@ -386,15 +386,15 @@ class Action extends AbstractAuditModel
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getIsUserAction()
+    public function isIsUserAction()
     {
         return $this->is_user_action;
     }
 
     /**
-     * @param string $is_user_action
+     * @param bool $is_user_action
      *
      * @return $this
      */

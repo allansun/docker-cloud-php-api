@@ -77,8 +77,8 @@ class Client
                     };
                 }
                 if (!($failCallback instanceof \Closure)) {
-                    $failCallback = function (GuzzleHttp\Psr7\Response $response) {
-                        Logger::getInstance()->log($response->getBody());
+                    $failCallback = function (GuzzleHttp\Exception\ServerException $exception) {
+                        Logger::getInstance()->log($exception->getResponse()->getBody());
                     };
                 }
                 $guzzle->requestAsync($method, $uri, $options)->then($successCallback, $failCallback)->wait();

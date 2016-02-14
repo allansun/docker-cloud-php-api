@@ -3,8 +3,8 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\NodeTypeGetListResponse as GetListResponse;
 use DockerCloud\Model\NodeType as Model;
+use DockerCloud\Model\Response\NodeTypeGetListResponse as GetListResponse;
 
 class NodeType extends AbstractInfrastructrueAPI
 {

@@ -17,15 +17,16 @@ class ServiceTriggerTest extends AbstractAPITest
      */
     static public function getMockData()
     {
-        return '{
-            "type": "action",
-            "action": "update",
-            "parents": [
-                "/api/app/v1/container/0b0e3538-88df-4f07-9aed-3a3cc4175076/"
-            ],
-            "resource_uri": "/api/app/v1/action/49f0efe8-a704-4a10-b02f-f96344fabadd/",
-            "state": "Success"
-        }';
+        return <<<JSON
+{
+  "url":
+  "/api/app/v1/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/call/",
+  "operation": "REDEPLOY",
+  "name": "docker_trigger",
+  "resource_uri":
+  "/api/app/v1/service/82d4a246-52d8-468d-903d-9da9ef05ff28/trigger/0224815a-c156-44e4-92d7-997c69354438/"
+}
+JSON;
     }
 
     protected function getUuid()

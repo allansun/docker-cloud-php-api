@@ -93,7 +93,7 @@ class NodeCluster extends AbstractInfrastructrueModel
     /**
      * List of tags to identify the node cluster nodes when deploying services
      *
-     * @var string[]
+     * @var \StdClass[]
      */
     protected $tags;
     /**
@@ -350,7 +350,7 @@ class NodeCluster extends AbstractInfrastructrueModel
     }
 
     /**
-     * @return \string[]
+     * @return \StdClass[]
      */
     public function getTags()
     {
@@ -358,7 +358,7 @@ class NodeCluster extends AbstractInfrastructrueModel
     }
 
     /**
-     * @param \string[] $tags
+     * @param \StdClass[] $tags
      *
      * @return $this
      */

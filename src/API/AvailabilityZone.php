@@ -3,8 +3,8 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\AvailabilityZoneGetListResponse as GetListResponse;
 use DockerCloud\Model\AvailabilityZone as Model;
+use DockerCloud\Model\Response\AvailabilityZoneGetListResponse as GetListResponse;
 
 class AvailabilityZone extends AbstractInfrastructrueAPI
 {

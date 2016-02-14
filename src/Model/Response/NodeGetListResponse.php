@@ -1,12 +1,12 @@
 <?php
 
 
-namespace DockerCloud\API\Response;
+namespace DockerCloud\Model\Response;
 
 
-use DockerCloud\Model\Repository as Model;
+use DockerCloud\Model\Node as Model;
 
-class RepositoryGetListResponse extends AbstractGetResponse
+class NodeGetListResponse extends AbstractGetResponse
 {
     /**
      * @var Model[]

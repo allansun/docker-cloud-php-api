@@ -6,8 +6,8 @@ namespace DockerCloud\Model;
 
 use DockerCloud\Model\Service\Binding;
 use DockerCloud\Model\Service\EnvironmentVariable;
-use DockerCloud\Model\Service\Port;
 use DockerCloud\Model\Service\Link;
+use DockerCloud\Model\Service\Port;
 
 class Service extends AbstractApplicationModel
 {
@@ -86,7 +86,7 @@ class Service extends AbstractApplicationModel
      * Network mode to set on the containers (see table Network Modes below,
      * more information https://docs.docker.com/docker-cloud/feature-reference/service-links/)
      *
-     * @var
+     * @var string
      */
     protected $net;
 
@@ -193,7 +193,7 @@ class Service extends AbstractApplicationModel
     /**
      * Metadata in form of dictionary used for every container of this service
      *
-     * @var \ArrayObject
+     * @var \StdClass
      */
     protected $labels;
 
@@ -401,7 +401,7 @@ class Service extends AbstractApplicationModel
     /**
      * List of environment variables that would be exposed in the containers if they are linked to this service
      *
-     * @var \ArrayObject
+     * @var \StdClass
      */
     protected $link_variables;
 
@@ -430,7 +430,7 @@ class Service extends AbstractApplicationModel
     /**
      * List of tags to be used to deploy the service
      *
-     * @var \ArrayObject[]
+     * @var \StdClass[]
      */
     protected $tags = [];
 
@@ -886,7 +886,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @return \ArrayObject
+     * @return \StdClass
      */
     public function getLabels()
     {
@@ -894,7 +894,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @param \ArrayObject $labels
+     * @param \StdClass $labels
      *
      * @return $this
      */
@@ -1490,7 +1490,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @return \ArrayObject
+     * @return \StdClass
      */
     public function getLinkVariables()
     {
@@ -1498,7 +1498,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @param \ArrayObject $link_variables
+     * @param \StdClass $link_variables
      *
      * @return $this
      */
@@ -1570,7 +1570,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @return \ArrayObject[]
+     * @return \StdClass[]
      */
     public function getTags()
     {
@@ -1578,7 +1578,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @param \ArrayObject[] $tags
+     * @param \StdClass[] $tags
      *
      * @return $this
      */

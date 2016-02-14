@@ -3,7 +3,7 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\StackGetListResponse as GetListResponse;
+use DockerCloud\Model\Response\StackGetListResponse as GetListResponse;
 use DockerCloud\Model\Stack as Model;
 use Symfony\Component\Yaml\Yaml;
 

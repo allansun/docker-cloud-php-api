@@ -3,7 +3,7 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\ServiceGetListResponse as GetListResponse;
+use DockerCloud\Model\Response\ServiceGetListResponse as GetListResponse;
 use DockerCloud\Model\Service as Model;
 
 class Service extends AbstractApplicationAPI

@@ -157,7 +157,7 @@ class Node extends AbstractApplicationModel
     /**
      * List of tags to be used to deploy the node
      *
-     * @var \ArrayObject[]
+     * @var \StdClass[]
      */
     protected $tags;
 
@@ -573,7 +573,7 @@ class Node extends AbstractApplicationModel
     }
 
     /**
-     * @return \ArrayObject[]
+     * @return \StdClass[]
      */
     public function getTags()
     {
@@ -581,7 +581,7 @@ class Node extends AbstractApplicationModel
     }
 
     /**
-     * @param \ArrayObject[] $tags
+     * @param \StdClass[] $tags
      *
      * @return $this
      */

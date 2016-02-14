@@ -40,7 +40,7 @@ class Registry extends AbstractRepoModel
     /**
      * The port number where the registry is listening to
      *
-     * @var string
+     * @var int
      */
     protected $port;
 
@@ -145,7 +145,7 @@ class Registry extends AbstractRepoModel
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getPort()
     {
@@ -153,7 +153,7 @@ class Registry extends AbstractRepoModel
     }
 
     /**
-     * @param string $port
+     * @param int $port
      *
      * @return $this
      */

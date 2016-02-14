@@ -4,9 +4,9 @@
 namespace DockerCloud\API;
 
 
-use DockerCloud\API\Response\AbstractGetResponse;
 use DockerCloud\Client;
 use DockerCloud\Exception;
+use DockerCloud\Model\Response\AbstractGetResponse;
 
 abstract class AbstractAPI
 {

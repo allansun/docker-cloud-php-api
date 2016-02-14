@@ -3,8 +3,8 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\ContainerGetListResponse as GetListResponse;
 use DockerCloud\Model\Container as Model;
+use DockerCloud\Model\Response\ContainerGetListResponse as GetListResponse;
 
 class Container extends AbstractApplicationAPI
 {

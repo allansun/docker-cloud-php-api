@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DockerCloud\API\Response;
+namespace DockerCloud\Model\Response;
 
 
 use DockerCloud\Model\Common\ResponseMetaData;

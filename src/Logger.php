@@ -3,6 +3,7 @@
 
 namespace DockerCloud;
 
+use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 
 class Logger
@@ -23,7 +24,11 @@ class Logger
     private function __construct()
     {
         $this->logger = new \Monolog\Logger('DockerCloud');
-        $this->logger->pushHandler(new StreamHandler('php://stdout'));
+        if (getenv('DEBUG')) {
+            $this->logger->pushHandler(new StreamHandler('php://stdout'));
+        } else {
+            $this->logger->pushHandler(new NullHandler());
+        }
     }
 
     /**
@@ -49,5 +54,23 @@ class Logger
         $this->logger->info($message, $extra);
 
         return $this;
+    }
+
+    /**
+     * @return \Monolog\Logger
+     */
+    public function getLogger(){
+        return $this->logger;
+    }
+
+    /**
+     * This function is only intended to be used in unit test
+     * You do not normally need to call it
+     *
+     * @return Logger
+     */
+    static public function reInitiate(){
+        static::$instance = null;
+        return self::getInstance();
     }
 }

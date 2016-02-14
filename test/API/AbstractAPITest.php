@@ -10,6 +10,11 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 
+/**
+ * Class AbstractAPITest
+ *
+ * @package DockerCloud\Test\API
+ */
 abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
 {
     static public function setUpBeforeClass()
@@ -85,4 +90,5 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
 
         return $this;
     }
+
 }

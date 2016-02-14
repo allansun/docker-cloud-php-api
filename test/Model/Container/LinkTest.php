@@ -1,0 +1,25 @@
+<?php
+
+
+namespace DockerCloud\Test\Model\Container;
+
+
+use DockerCloud\Model\Container;
+use DockerCloud\Model\Container\Link as Model;
+use DockerCloud\Test\API\ContainerTest as APITest;
+use DockerCloud\Test\Model\AbstractModelTest;
+
+class LinkTest extends AbstractModelTest
+{
+    protected $modelClass = Model:: class;
+
+    /**
+     * @return string
+     */
+    protected function getMockData()
+    {
+        $data = (new Container(json_decode(APITest::getMockData())))->getLinkedToContainer();
+
+        return json_encode(array_pop($data));
+    }
+}

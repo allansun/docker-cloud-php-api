@@ -3,8 +3,8 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\RegistryGetListResponse as GetListResponse;
 use DockerCloud\Model\Registry as Model;
+use DockerCloud\Model\Response\RegistryGetListResponse as GetListResponse;
 
 class Registry extends AbstractRepoAPI
 {

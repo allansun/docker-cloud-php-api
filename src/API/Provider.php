@@ -3,8 +3,8 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\ProviderGetListResponse as GetListResponse;
 use DockerCloud\Model\Provider as Model;
+use DockerCloud\Model\Response\ProviderGetListResponse as GetListResponse;
 
 class Provider extends AbstractInfrastructrueAPI
 {

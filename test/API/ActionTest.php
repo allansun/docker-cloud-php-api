@@ -14,24 +14,26 @@ class ActionTest extends AbstractAPITest
      */
     static public function getMockData()
     {
-        return '{
-            "action": "Cluster Create",
-            "body": "{\"image\": \"tutum/ubuntu-quantal:latest/\", \"name\": \"test_cluster\"}",
-            "end_date": "Wed, 17 Sep 2014 08:26:22 +0000",
-            "ip": "56.78.90.12",
-            "is_user_action": true,
-            "can_be_canceled": false,
-            "location": "New York, USA",
-            "method": "POST",
-            "object": "/api/infra/v1/cluster/eea638f4-b77a-4183-b241-22dbd7866f22/",
-            "path": "/api/infra/v1/cluster/",
-            "resource_uri": "/api/audit/v1/action/6246c558-976c-4df6-ba60-eb1a344a17af/",
-            "start_date": "Wed, 17 Sep 2014 08:26:22 +0000",
-            "state": "Success",
-            "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko)
-            Version/7.0.6 Safari/537.78.2",
-            "uuid": "6246c558-976c-4df6-ba60-eb1a344a17af"
-        }';
+        return <<<JSON
+{
+    "action": "Cluster Create",
+    "body": "{\"image\": \"tutum/ubuntu-quantal:latest/\", \"name\": \"test_cluster\"}",
+    "end_date": "Wed, 17 Sep 2014 08:26:22 +0000",
+    "ip": "56.78.90.12",
+    "is_user_action": true,
+    "can_be_canceled": false,
+    "can_be_retried": false,
+    "location": "New York, USA",
+    "method": "POST",
+    "object": "/api/infra/v1/cluster/eea638f4-b77a-4183-b241-22dbd7866f22/",
+    "path": "/api/infra/v1/cluster/",
+    "resource_uri": "/api/audit/v1/action/6246c558-976c-4df6-ba60-eb1a344a17af/",
+    "start_date": "Wed, 17 Sep 2014 08:26:22 +0000",
+    "state": "Success",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.78.2 (KHTML, like Gecko) ",
+    "uuid": "6246c558-976c-4df6-ba60-eb1a344a17af"
+}
+JSON;
     }
 
     /**

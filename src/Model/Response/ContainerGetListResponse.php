@@ -1,12 +1,12 @@
 <?php
 
 
-namespace DockerCloud\API\Response;
+namespace DockerCloud\Model\Response;
 
 
-use DockerCloud\Model\Region as Model;
+use DockerCloud\Model\Container as Model;
 
-class RegionGetListResponse extends AbstractGetResponse
+class ContainerGetListResponse extends AbstractGetResponse
 {
     /**
      * @var Model[]

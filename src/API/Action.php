@@ -3,8 +3,8 @@
 
 namespace DockerCloud\API;
 
-use DockerCloud\API\Response\ActionGetListResponse as GetListResponse;
 use DockerCloud\Model\Action as Model;
+use DockerCloud\Model\Response\ActionGetListResponse as GetListResponse;
 
 class Action extends AbstractAuditAPI
 {

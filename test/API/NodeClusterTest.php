@@ -17,12 +17,40 @@ class NodeClusterTest extends AbstractAPITest
      */
     static public function getMockData()
     {
-        return '{
-        "available": true,
-        "name": "ap-northeast-1a",
-        "region": "/api/infra/v1/region/az/ap-northeast-1/",
-        "resource_uri": "/api/infra/v1/az/aws/ap-northeast-1/ap-northeast-1a/"
-        }';
+        return <<<JSON
+{
+    "current_num_nodes": 1,
+    "deployed_datetime": "Tue, 16 Sep 2014 17:01:15 +0000",
+    "destroyed_datetime": null,
+    "disk": 60,
+    "nickname": "my test cluster",
+    "name": "TestCluster",
+    "node_type": "/api/infra/v1/nodetype/aws/t2.micro/",
+    "nodes": [
+        "/api/infra/v1/node/75d20367-0948-4f10-8ba4-ffb4d16ed3c6/"
+    ],
+    "region": "/api/infra/v1/region/aws/us-east-1/",
+    "resource_uri": "/api/infra/v1/nodecluster/5516df0b-721e-4470-b350-741ff22e63a0/",
+    "state": "Deployed",
+    "tags": [
+        {"name": "tag_one"},
+        {"name": "tag-two"},
+        {"name": "tagthree3"}
+    ],
+    "target_num_nodes": 2,
+    "uuid": "5516df0b-721e-4470-b350-741ff22e63a0",
+    "provider_options": {
+        "vpc": {
+            "id": "vpc-aa1c70d4",
+            "subnets": ["subnet-aaa7d94f", "subnet-aa15fa64"],
+            "security_groups": ["sg-aa1c70d4"]
+        },
+        "iam": {
+            "instance_profile_name": "my_instance_profile"
+        }
+    }
+}
+JSON;
     }
 
     /**

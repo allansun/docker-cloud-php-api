@@ -10,6 +10,7 @@
     <php>
         <env name="USERNAME" value=""/>
         <env name="APIKEY" value=""/>
+        <env name="DEBUG" value="true"/>
     </php>
     <testsuites>
         <testsuite name="DockerCloud\Test\API\">
