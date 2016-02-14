@@ -4,12 +4,10 @@
 namespace DockerCloud\Model\Response;
 
 
-use DockerCloud\Model\Common\ResponseMetaData;
-
 abstract class AbstractGetResponse extends AbstractResponse
 {
     /**
-     * @var ResponseMetaData
+     * @var MetaData
      */
     protected $meta;
 
@@ -17,11 +15,11 @@ abstract class AbstractGetResponse extends AbstractResponse
     {
         parent::__construct($json);
 
-        $this->meta = new ResponseMetaData($this->getResponse()->meta);
+        $this->meta = new MetaData($this->getResponse()->meta);
     }
 
     /**
-     * @return ResponseMetaData
+     * @return MetaData
      */
     public function getMeta()
     {

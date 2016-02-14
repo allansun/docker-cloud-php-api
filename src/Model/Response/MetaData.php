@@ -1,12 +1,12 @@
 <?php
 
 
-namespace DockerCloud\Model\Common;
+namespace DockerCloud\Model\Response;
 
 
 use DockerCloud\Model\AbstractModel;
 
-class ResponseMetaData extends AbstractModel
+class MetaData extends AbstractModel
 {
     /**
      * @var int

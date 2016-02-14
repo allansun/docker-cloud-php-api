@@ -5,7 +5,7 @@ namespace DockerCloud\Test\API;
 
 use DockerCloud\Client;
 use DockerCloud\Model\AbstractModel;
-use DockerCloud\Model\Common\ResponseMetaData;
+use DockerCloud\Model\Response\MetaData;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
@@ -66,7 +66,7 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
             $body = [$body];
         }
 
-        $MetaData = new ResponseMetaData();
+        $MetaData = new MetaData();
         $MetaData->setLimit(25)
             ->setTotalCount(count($body));
 
