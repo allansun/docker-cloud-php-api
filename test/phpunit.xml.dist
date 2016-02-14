@@ -10,20 +10,27 @@
     <php>
         <env name="USERNAME" value=""/>
         <env name="APIKEY" value=""/>
-        <env name="DEBUG" value="true"/>
+        <env name="DEBUG" value="true" />
     </php>
     <testsuites>
+        <testsuite name="DockerCloud\Test\">
+            <file>ClientTest.php</file>
+            <file>LoggerTest.php</file>
+        </testsuite>
+        <testsuite name="DockerCloud\Test\Model\">
+            <directory suffix=".php">./Model</directory>
+        </testsuite>
         <testsuite name="DockerCloud\Test\API\">
-            <directory>./</directory>
+            <directory suffix=".php">./API</directory>
         </testsuite>
     </testsuites>
 
     <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
+        <whitelist>
             <directory suffix=".php">../src</directory>
             <exclude>
-                <directory suffix=".php">.</directory>
-                <directory suffix=".php">../vendor</directory>
+                <directory>../vendor</directory>
+                <directory>../test</directory>
             </exclude>
         </whitelist>
     </filter>
