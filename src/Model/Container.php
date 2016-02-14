@@ -1347,7 +1347,7 @@ class Container extends AbstractApplicationModel
     }
 
     /**
-     * @param Link[] $linked_to_container
+     * @param $linked_to_containers
      *
      * @return $this
      */

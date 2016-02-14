@@ -54,7 +54,7 @@ abstract class AbstractAPI
 
     /**
      * @param array $filters
-     *
+     * @param array|null $allowedFilters
      * @throws Exception
      */
     public function validateFilter($filters = [], $allowedFilters = null)

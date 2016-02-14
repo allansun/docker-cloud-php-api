@@ -31,13 +31,14 @@ abstract class AbstractApplicationAPI extends AbstractAPI
         $Model = $this->getByUri($Model->getResourceUri());
         while ($state != $Model->getState()) {
             if ($timer >= $timeOut) {
-                throw new Exception(sprintf('Waited resource [%s] to be in state [%s] timed out [%s seconds].'
-                    , $Model->getResourceUri(), $state, $timer));
+                throw new Exception(sprintf('Waited resource [%s] to be in state [%s] timed out [%s seconds].',
+                    $Model->getResourceUri(), $state, $timer));
             }
             sleep($sleepTime);
             $timer += $sleepTime;
             $Model = $this->getByUri($Model->getResourceUri());
         }
+
         return $Model;
     }
 

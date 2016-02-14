@@ -27,8 +27,6 @@ class ServiceTrigger extends AbstractAPI
     }
 
     /**
-     * @param string $uuid
-     *
      * @return string
      */
     protected function getAPINameSpace()
@@ -91,7 +89,8 @@ class ServiceTrigger extends AbstractAPI
     }
 
     /**
-     * @param $uri
+     * @param      $uri
+     * @param null $numOfContainers
      *
      * @return Model
      * @throws \DockerCloud\Exception

@@ -26,7 +26,7 @@ class ModelHydrator implements HydrationInterface, ExtractionInterface
     private function __construct()
     {
         $this->hydrator = new ClassMethods();
-        $this->hydrator->addFilter("arrayCopy",
+        $this->hydrator->addFilter('arrayCopy',
             function ($property) {
                 list($class, $method) = explode('::', $property);
                 if ($method === 'getArrayCopy') {

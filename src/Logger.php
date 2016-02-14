@@ -59,7 +59,8 @@ class Logger
     /**
      * @return \Monolog\Logger
      */
-    public function getLogger(){
+    public function getLogger()
+    {
         return $this->logger;
     }
 
@@ -69,8 +70,10 @@ class Logger
      *
      * @return Logger
      */
-    static public function reInitiate(){
+    static public function reInitiate()
+    {
         static::$instance = null;
+
         return self::getInstance();
     }
 }
