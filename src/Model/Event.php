@@ -51,6 +51,18 @@ class Event extends AbstractModel
      * @var string
      */
     protected $state;
+    /**
+     * A unique identifier for the event
+     *
+     * @var string
+     */
+    protected $uuid;
+    /**
+     * The date and time of the event
+     *
+     * @var string
+     */
+    protected $datetime;
 
     /**
      * @return string
@@ -148,6 +160,46 @@ class Event extends AbstractModel
     public function setState($state)
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
+     * @param string $uuid
+     *
+     * @return $this
+     */
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDatetime()
+    {
+        return $this->datetime;
+    }
+
+    /**
+     * @param string $datetime
+     *
+     * @return $this
+     */
+    public function setDatetime($datetime)
+    {
+        $this->datetime = $datetime;
 
         return $this;
     }

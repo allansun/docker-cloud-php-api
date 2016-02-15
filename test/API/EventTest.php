@@ -21,7 +21,9 @@ class EventTest extends AbstractAPITest
                 "/api/app/v1/container/0b0e3538-88df-4f07-9aed-3a3cc4175076/"
             ],
             "resource_uri": "/api/app/v1/action/49f0efe8-a704-4a10-b02f-f96344fabadd/",
-            "state": "Success"
+            "state": "Success",
+            "uuid": "c1dd4e1e-1356-411c-8613-e15146633640",
+            "datetime": "Thu, 16 Oct 2014 12:04:08 +0000"
         }';
     }
 
