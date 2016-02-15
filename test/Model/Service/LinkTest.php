@@ -22,4 +22,15 @@ class LinkTest extends AbstractModelTest
 
         return json_encode(array_pop($data));
     }
+
+    public function testBuild()
+    {
+        $FromService = new Service('{"resource_uri":"DB"}');
+        $ToService   = new Service('{"resource_uri":"APP"}');
+
+        $Model = Model::build($FromService, $ToService, 'db');
+        $this->assertEquals('DB', $Model->getFromService());
+        $this->assertEquals('APP', $Model->getToService());
+        $this->assertEquals('db', $Model->getName());
+    }
 }

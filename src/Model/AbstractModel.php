@@ -9,10 +9,14 @@ abstract class AbstractModel
     /**
      * AbstractModel constructor.
      *
-     * @param \StdClass|array $data
+     * @param \StdClass|array!string $data
      */
     public function __construct($data = null)
     {
+        if (is_string($data)) {
+            $data = json_decode($data, true);
+        }
+
         $this->exchangeArray($data);
     }
 
