@@ -237,7 +237,7 @@ class Service extends AbstractApplicationModel
      *
      * @var string
      */
-    protected $cgroup_name;
+    protected $cgroup_parent;
 
     /**
      * If the containers of this service have the tty enable (false by default)
@@ -858,6 +858,21 @@ class Service extends AbstractApplicationModel
     }
 
     /**
+     * @param Port $Port
+     *
+     * @return $this
+     */
+    public function addContainerPort(Port $Port)
+    {
+        if (!$this->container_ports) {
+            $this->container_ports = [];
+        }
+        $this->container_ports[] = $Port;
+
+        return $this;
+    }
+
+    /**
      * @return EnvironmentVariable[]
      */
     public function getContainerEnvvars()
@@ -881,6 +896,21 @@ class Service extends AbstractApplicationModel
         }
 
         $this->container_envvars = $data;
+
+        return $this;
+    }
+
+    /**
+     * @param EnvironmentVariable $EnvironmentVariable
+     *
+     * @return $this
+     */
+    public function addContainerEnvvar(EnvironmentVariable $EnvironmentVariable)
+    {
+        if (!$this->container_envvars) {
+            $this->container_envvars = [];
+        }
+        $this->container_envvars[] = $EnvironmentVariable;
 
         return $this;
     }
@@ -1008,19 +1038,19 @@ class Service extends AbstractApplicationModel
     /**
      * @return string
      */
-    public function getCgroupName()
+    public function getCgroupParent()
     {
-        return $this->cgroup_name;
+        return $this->cgroup_parent;
     }
 
     /**
-     * @param string $cgroup_name
+     * @param string $cgroup_parent
      *
      * @return $this
      */
-    public function setCgroupName($cgroup_name)
+    public function setCgroupParent($cgroup_parent)
     {
-        $this->cgroup_name = $cgroup_name;
+        $this->cgroup_parent = $cgroup_parent;
 
         return $this;
     }
@@ -1374,6 +1404,21 @@ class Service extends AbstractApplicationModel
     }
 
     /**
+     * @param Link $Link
+     *
+     * @return $this
+     */
+    public function addLinkedFromService(Link $Link)
+    {
+        if (!$this->linked_from_service) {
+            $this->linked_from_service = [];
+        }
+        $this->linked_from_service[] = $Link;
+
+        return $this;
+    }
+
+    /**
      * @return Link[]
      */
     public function getLinkedToService()
@@ -1402,6 +1447,21 @@ class Service extends AbstractApplicationModel
     }
 
     /**
+     * @param Link $Link
+     *
+     * @return $this
+     */
+    public function addLinkedToService(Link $Link)
+    {
+        if (!$this->linked_to_service) {
+            $this->linked_to_service = [];
+        }
+        $this->linked_to_service[] = $Link;
+
+        return $this;
+    }
+
+    /**
      * @return Binding[]
      */
     public function getBindings()
@@ -1425,6 +1485,21 @@ class Service extends AbstractApplicationModel
         }
 
         $this->bindings = $data;
+
+        return $this;
+    }
+
+    /**
+     * @param Binding $Binding
+     *
+     * @return $this
+     */
+    public function addBinding(Binding $Binding)
+    {
+        if (!$this->bindings) {
+            $this->bindings = [];
+        }
+        $this->bindings[] = $Binding;
 
         return $this;
     }
