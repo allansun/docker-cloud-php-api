@@ -49,8 +49,8 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param $status
-     * @param $body
+     * @param                                      $status
+     * @param string|AbstractModel|AbstractModel[] $body
      *
      * @return AbstractAPITest
      */
@@ -60,9 +60,9 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
             $body = json_decode($body);
         }
         if ($body instanceof AbstractModel) {
-            $body = $body->getArrayCopy();
+            $body = [$body->getArrayCopy()];
         }
-        if (!is_array($body)) {
+        if (!is_array($body) && null !== $body) {
             $body = [$body];
         }
 

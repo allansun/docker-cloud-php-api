@@ -146,4 +146,19 @@ class Stack extends AbstractApplicationAPI
     {
         return new Model($this->getClient()->request('DELETE', $this->getAPINameSpace() . $uuid . '/'));
     }
+
+    /**
+     * @param $name
+     *
+     * @return Model|null
+     */
+    public function findByName($name)
+    {
+        $GetListResponse = $this->getList(['name' => $name]);
+        if (1 == $GetListResponse->getMeta()->getTotalCount()) {
+            return $GetListResponse->getObjects()[0];
+        }
+
+        return null;
+    }
 }

@@ -201,4 +201,24 @@ class Service extends AbstractApplicationAPI
     {
         return new Model($this->getClient()->request('DELETE', $this->getAPINameSpace() . $uuid . '/'));
     }
+
+    /**
+     * @param             $name
+     * @param string|null $stackUri
+     *
+     * @return Model|Model[]|null
+     */
+    public function findByName($name, $stackUri = null)
+    {
+        $GetListResponse = $this->getList(['name' => $name, 'stack' => $stackUri]);
+        if (1 == $GetListResponse->getMeta()->getTotalCount()) {
+            return $GetListResponse->getObjects()[0];
+        }
+
+        if (1 <= $GetListResponse->getMeta()->getTotalCount() && !$stackUri) {
+            return $GetListResponse->getObjects();
+        }
+
+        return null;
+    }
 }

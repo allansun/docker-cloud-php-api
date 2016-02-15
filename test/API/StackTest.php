@@ -176,4 +176,25 @@ class StackTest extends AbstractAPITest
         $Model = $API->terminate($Model->getUuid());
         $this->assertInstanceOf(Model::class, $Model);
     }
+
+    public function testFindByName()
+    {
+        $Model = new Model(json_decode($this->getMockData()));
+        $Model->setName('test');
+
+        $this->mockGetListResponse(200, $Model);
+
+        $API   = new API();
+        $Model = $API->findByName('test');
+        $this->assertInstanceOf(Model::class, $Model);
+        $this->assertEquals('test', $Model->getName());
+    }
+
+    public function testFindByNameWithNoResult(){
+        $this->mockGetListResponse(200, null);
+
+        $API   = new API();
+        $this->assertNull($API->findByName('not-exist'));
+
+    }
 }
