@@ -22,4 +22,11 @@ class EnvironmentVariableTest extends AbstractModelTest
 
         return json_encode(array_pop($data));
     }
+
+    public function testBuild()
+    {
+        $Model = Model::build('test_key', 'test_value');
+        $this->assertEquals('test_key', $Model->getKey());
+        $this->assertEquals('test_value', $Model->getValue());
+    }
 }

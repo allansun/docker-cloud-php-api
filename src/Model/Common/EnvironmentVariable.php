@@ -60,4 +60,19 @@ class EnvironmentVariable extends AbstractModel
 
         return $this;
     }
+
+    /**
+     * @param $key
+     * @param $value
+     *
+     * @return static
+     */
+    static public function build($key, $value)
+    {
+        $EnvironmentVariable = new static();
+        $EnvironmentVariable->setKey($key);
+        $EnvironmentVariable->setValue($value);
+
+        return $EnvironmentVariable;
+    }
 }
