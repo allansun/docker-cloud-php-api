@@ -114,4 +114,5 @@ class Binding extends AbstractModel
 
         return $this;
     }
+
 }

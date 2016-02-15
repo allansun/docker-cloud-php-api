@@ -22,4 +22,11 @@ class PortTest extends AbstractModelTest
 
         return json_encode(array_pop($data));
     }
+
+    public function testBuild(){
+        $Model = Model::build(80,8080,true);
+        $this->assertEquals(80,$Model->getInnerPort());
+        $this->assertEquals(8080,$Model->getOuterPort());
+        $this->assertTrue($Model->isPublished());
+    }
 }

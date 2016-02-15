@@ -174,4 +174,20 @@ class Port extends AbstractModel
         return $this;
     }
 
+    /**
+     * @param      $outerPort
+     * @param null $innerPort
+     * @param null $isPublished
+     *
+     * @return static
+     */
+    static public function build($innerPort = null, $outerPort = null, $isPublished = null)
+    {
+        $Port = new static();
+        $Port->setOuterPort($outerPort);
+        $Port->setInnerPort($innerPort);
+        $Port->setPublished($isPublished);
+
+        return $Port;
+    }
 }
