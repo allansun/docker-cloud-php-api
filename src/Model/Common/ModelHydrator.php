@@ -46,6 +46,10 @@ class ModelHydrator implements HydrationInterface, ExtractionInterface
      */
     public function extract($object, $fieldsToInclude = [])
     {
+        if(!is_object($object)){
+            return $object;
+        }
+
         $hydrator = new Reflection();
         $hydrator->addFilter('exclude',
             function ($property) use ($fieldsToInclude) {
@@ -64,10 +68,15 @@ class ModelHydrator implements HydrationInterface, ExtractionInterface
         $resultCopy = $result = $hydrator->extract($object);
         array_walk($resultCopy, function (&$value,$key) use(&$result)  {
             if($value instanceof AbstractModel){
-                $result[$key] = $value->getArrayCopy();
+                $value = $value->getArrayCopy();
             }
             if (is_null($value)) {
                 unset($result[$key]);
+            }
+            if(is_array($value)){
+                array_walk($value, function(&$value){
+                    $value = $this->extract($value);
+                });
             }
         });
         return $result;
