@@ -20,7 +20,7 @@ class EnvironmentVariableTest extends AbstractModelTest
     {
         $data = (new Container(json_decode(APITest::getMockData())))->getContainerEnvvars();
 
-        return json_encode(array_pop($data));
+        return \Zend\Json\Encoder::encode(array_pop($data));
     }
 
     public function testBuild()

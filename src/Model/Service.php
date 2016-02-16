@@ -59,6 +59,13 @@ class Service extends AbstractApplicationModel
     protected $image_name;
 
     /**
+     * Just to be compatible with DockerCloud's inconsistant naming convention when creating
+     *
+     * @var string
+     */
+    protected $image;
+
+    /**
      * A user provided name for the service. This name will be inherited by the
      * service containers and will be used in endpoint URLs, environment variable names, etc.
      *
@@ -300,7 +307,7 @@ class Service extends AbstractApplicationModel
      *
      * @var string[]
      */
-    protected $secuirty_opt = [];
+    protected $security_opt = [];
 
     /**
      * Entrypoint to be set on the containers launched as part of the service,
@@ -503,7 +510,7 @@ class Service extends AbstractApplicationModel
      */
     public function setImageName($image_name)
     {
-        $this->image_name = $image_name;
+        $this->image_name = $this->image = $image_name;
 
         return $this;
     }
@@ -1218,19 +1225,19 @@ class Service extends AbstractApplicationModel
     /**
      * @return \string[]
      */
-    public function getSecuirtyOpt()
+    public function getSecurityOpt()
     {
-        return $this->secuirty_opt;
+        return $this->security_opt;
     }
 
     /**
-     * @param \string[] $secuirty_opt
+     * @param \string[] $security_opt
      *
      * @return $this
      */
-    public function setSecuirtyOpt($secuirty_opt)
+    public function setSecurityOpt($security_opt)
     {
-        $this->secuirty_opt = (array)$secuirty_opt;
+        $this->security_opt = (array)$security_opt;
 
         return $this;
     }
@@ -1714,4 +1721,30 @@ class Service extends AbstractApplicationModel
         return $this->image_name;
     }
 
+    public function getArrayCopy($fieldsToInclude = [])
+    {
+        return parent::getArrayCopy(array_merge($fieldsToInclude, [
+            'image',
+            'name',
+            'target_num_containers',
+            'run_command',
+            'entrypoint',
+            'container_ports',
+            'container_envvars',
+            'linked_to_service',
+            'bindings',
+            'autorestart',
+            'autodestroy',
+            'sequential_deployment',
+            'roles',
+            'privileged',
+            'deployment_strategy',
+            'tags',
+            'autoredeploy',
+            'net',
+            'pid',
+            'working_dir',
+            'nickname'
+        ]));
+    }
 }

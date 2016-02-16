@@ -20,6 +20,6 @@ class ProviderOptionsTest extends AbstractModelTest
     {
         $data = (new NodeCluster(json_decode(APITest::getMockData())))->getProviderOptions();
 
-        return json_encode($data);
+        return \Zend\Json\Encoder::encode($data);
     }
 }

@@ -56,7 +56,7 @@ class Stack extends AbstractApplicationModel
      *
      * @var string[]
      */
-    protected $services=[];
+    protected $services = [];
 
     /**
      * The date and time of the last deployment of the stack (if applicable, null otherwise)
@@ -259,5 +259,12 @@ class Stack extends AbstractApplicationModel
         return $this;
     }
 
-
+    public function getArrayCopy($fieldsToInclude = [])
+    {
+        return parent::getArrayCopy(array_merge($fieldsToInclude, [
+            'name',
+            'nickname',
+            'services',
+        ]));
+    }
 }

@@ -26,7 +26,7 @@ class VPC extends AbstractModel
     /**
      * the security group that will be applied to every node of the cluster (optional)
      *
-     * @var string
+     * @var string[]
      */
     protected $security_groups;
 

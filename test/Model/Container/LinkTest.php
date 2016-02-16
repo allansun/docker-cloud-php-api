@@ -20,6 +20,6 @@ class LinkTest extends AbstractModelTest
     {
         $data = (new Container(json_decode(APITest::getMockData())))->getLinkedToContainer();
 
-        return json_encode(array_pop($data));
+        return \Zend\Json\Encoder::encode(array_pop($data));
     }
 }

@@ -20,6 +20,6 @@ class VPCTest extends AbstractModelTest
     {
         $data = (new NodeCluster(json_decode(APITest::getMockData())))->getProviderOptions()->getVpc();
 
-        return json_encode($data);
+        return \Zend\Json\Encoder::encode($data);
     }
 }

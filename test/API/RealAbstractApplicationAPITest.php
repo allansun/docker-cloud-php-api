@@ -8,6 +8,7 @@ use DockerCloud\Exception;
 use DockerCloud\Model\Service as Model;
 use Faker\Factory;
 use GuzzleHttp\Psr7\Response;
+use Zend\Json\Encoder;
 
 class RealAbstractApplicationAPITest extends AbstractAPITest
 {
@@ -17,11 +18,11 @@ class RealAbstractApplicationAPITest extends AbstractAPITest
         $MockedModel = new Model(json_decode(ServiceTest::getMockData(), true));
         $this->mockResponses([
             new Response(200, ['Content-Type' => 'application/json'],
-                json_encode($MockedModel->setState(Model::STATE_NOT_RUNNING)->getArrayCopy())),
+                Encoder::encode($MockedModel->setState(Model::STATE_NOT_RUNNING)->getArrayCopy(['state']))),
             new Response(200, ['Content-Type' => 'application/json'],
-                json_encode($MockedModel->setState(Model::STATE_STARTING)->getArrayCopy())),
+                Encoder::encode($MockedModel->setState(Model::STATE_STARTING)->getArrayCopy(['state']))),
             new Response(200, ['Content-Type' => 'application/json'],
-                json_encode($MockedModel->setState(Model::STATE_RUNNING)->getArrayCopy())),
+                Encoder::encode($MockedModel->setState(Model::STATE_RUNNING)->getArrayCopy(['state']))),
         ]);
 
         $API   = new API();
@@ -35,9 +36,9 @@ class RealAbstractApplicationAPITest extends AbstractAPITest
         $MockedModel = new Model(json_decode(ServiceTest::getMockData(), true));
         $this->mockResponses([
             new Response(200, ['Content-Type' => 'application/json'],
-                json_encode($MockedModel->setState(Model::STATE_NOT_RUNNING)->getArrayCopy())),
+                Encoder::encode($MockedModel->setState(Model::STATE_NOT_RUNNING)->getArrayCopy())),
             new Response(200, ['Content-Type' => 'application/json'],
-                json_encode($MockedModel->setState(Model::STATE_STARTING)->getArrayCopy())),
+                Encoder::encode($MockedModel->setState(Model::STATE_STARTING)->getArrayCopy())),
         ]);
 
         $API   = new API();

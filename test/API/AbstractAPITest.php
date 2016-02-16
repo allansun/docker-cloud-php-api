@@ -32,11 +32,11 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
     protected function mockResponse($status, $body)
     {
         if ($body instanceof AbstractModel) {
-            $body = json_encode($body->getArrayCopy());
+            $body = \Zend\Json\Encoder::encode($body->getArrayCopy());
         }
 
         if (!is_string($body)) {
-            $body = json_encode($body);
+            $body = \Zend\Json\Encoder::encode($body);
         }
 
         Client::getInstance()->setDefaultOption('handler',

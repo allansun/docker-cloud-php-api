@@ -33,7 +33,7 @@ class Link extends AbstractModel
      * A dictionary with the endpoints (protocol, IP and port) to be used
      * to reach each of the “server” container exposed ports
      *
-     * @var \ArrayObject
+     * @var \StdClass
      */
     protected $endpoints;
 

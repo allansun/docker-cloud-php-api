@@ -5,21 +5,23 @@ namespace DockerCloud\Model\NodeCluster;
 
 
 use DockerCloud\Model\AbstractModel;
+use DockerCloud\Model\NodeCluster\ProviderOption\IAM;
+use DockerCloud\Model\NodeCluster\ProviderOption\VPC;
 
 class ProviderOptions extends AbstractModel
 {
     /**
-     * @var ProviderOption\VPC
+     * @var VPC
      */
     protected $vpc;
 
     /**
-     * @var ProviderOption\IAM
+     * @var IAM
      */
     protected $iam;
 
     /**
-     * @return ProviderOption\VPC
+     * @return VPC
      */
     public function getVpc()
     {
@@ -27,7 +29,7 @@ class ProviderOptions extends AbstractModel
     }
 
     /**
-     * @param ProviderOption\VPC $vpc
+     * @param VPC $vpc
      *
      * @return $this
      */
@@ -42,7 +44,7 @@ class ProviderOptions extends AbstractModel
     }
 
     /**
-     * @return ProviderOption\IAM
+     * @return IAM
      */
     public function getIam()
     {
@@ -50,7 +52,7 @@ class ProviderOptions extends AbstractModel
     }
 
     /**
-     * @param ProviderOption\IAM $iam
+     * @param IAM $iam
      *
      * @return $this
      */

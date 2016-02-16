@@ -114,4 +114,12 @@ class ServiceTrigger extends AbstractModel
         return $this;
     }
 
+    public function getArrayCopy($fieldsToInclude = [])
+    {
+        return parent::getArrayCopy(array_merge($fieldsToInclude, [
+            'image',
+            'operation',
+        ]));
+    }
+
 }

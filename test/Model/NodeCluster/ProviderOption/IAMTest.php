@@ -20,6 +20,6 @@ class IAMTest extends AbstractModelTest
     {
         $data = (new NodeCluster(json_decode(APITest::getMockData())))->getProviderOptions()->getIam();
 
-        return json_encode($data);
+        return \Zend\Json\Encoder::encode($data);
     }
 }

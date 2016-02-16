@@ -23,9 +23,9 @@ abstract class AbstractModel
     /**
      * @return array
      */
-    public function getArrayCopy()
+    public function getArrayCopy($fieldsToInclude = [])
     {
-        return ModelHydrator::getInstance()->extract($this);
+        return ModelHydrator::getInstance()->extract($this, $fieldsToInclude);
     }
 
     /**
@@ -38,7 +38,8 @@ abstract class AbstractModel
         return ModelHydrator::getInstance()->hydrate((array)$data, $this);
     }
 
-    public function toJson(){
+    public function toJson()
+    {
         return \Zend\Json\Encoder::encode($this->getArrayCopy());
     }
 }

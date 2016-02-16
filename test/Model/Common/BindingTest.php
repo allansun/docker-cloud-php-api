@@ -20,6 +20,6 @@ class BindingTest extends AbstractModelTest
     {
         $data = (new Container(json_decode(APITest::getMockData())))->getBindings();
 
-        return json_encode(array_pop($data));
+        return \Zend\Json\Encoder::encode(array_pop($data));
     }
 }

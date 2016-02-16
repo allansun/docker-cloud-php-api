@@ -20,6 +20,6 @@ class LastMetricTest extends AbstractModelTest
     {
         $data = (new Container(json_decode(APITest::getMockData())))->getLastMetric();
 
-        return json_encode($data);
+        return \Zend\Json\Encoder::encode($data);
     }
 }

@@ -412,5 +412,17 @@ class NodeCluster extends AbstractInfrastructrueModel
         return $this;
     }
 
-
+    public function getArrayCopy($fieldsToInclude = [])
+    {
+        return parent::getArrayCopy(array_merge($fieldsToInclude, [
+            'name',
+            'node_type',
+            'region',
+            'disk',
+            'nickname',
+            'target_num_nodes',
+            'tags',
+            'provider_options',
+        ]));
+    }
 }
