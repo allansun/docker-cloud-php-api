@@ -1703,4 +1703,15 @@ class Service extends AbstractApplicationModel
 
         return $this;
     }
+
+    /**
+     * Just to be compatible with DockerCloud's inconsistant naming convention when creating
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image_name;
+    }
+
 }

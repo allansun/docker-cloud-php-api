@@ -91,6 +91,7 @@ class ServiceTest extends AbstractAPITest
     ],
     "hostname": "hostname",
     "image_name": "tutum/wordpress-stackable:latest",
+    "image": "tutum/wordpress-stackable:latest",
     "nickname": "wordpress-stackable",
     "labels": {
     "com.example.description": "Accounting webapp",
