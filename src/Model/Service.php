@@ -27,7 +27,10 @@ class Service extends AbstractApplicationModel
     const DEPLOYMENT_STRATEGY_EVERY_NODE = 'EVERY_NODE';
 
     const NETWORK_MODE_BRIDGE = 'bridge';
-    const NETWORK_MODE_host = 'host';
+    const NETWORK_MODE_HOST = 'host';
+
+    const PID_NONE = 'none';
+    const PID_HOST = 'host';
 
     const AUTO_RESTART_OFF = 'OFF';
     const AUTO_RESTART_ON_FAILURE = 'ON_FAILURE';
@@ -95,7 +98,7 @@ class Service extends AbstractApplicationModel
      *
      * @var string
      */
-    protected $net;
+    protected $net = self::NETWORK_MODE_BRIDGE;
 
     /**
      * Set the PID (Process) Namespace mode for the containers
@@ -103,7 +106,7 @@ class Service extends AbstractApplicationModel
      *
      * @var int
      */
-    protected $pid;
+    protected $pid = self::PID_NONE;
 
     /**
      * Flag indicating if the current service definition is synchronized with the current containers.
@@ -145,7 +148,7 @@ class Service extends AbstractApplicationModel
      *
      * @var int
      */
-    protected $target_num_containers;
+    protected $target_num_containers = 1;
 
     /**
      * The actual number of containers deployed for the service
@@ -331,7 +334,7 @@ class Service extends AbstractApplicationModel
      *
      * @var bool
      */
-    protected $sequential_deployment;
+    protected $sequential_deployment = false;
 
     /**
      * The relative CPU priority of the containers of the service
@@ -388,7 +391,7 @@ class Service extends AbstractApplicationModel
      *
      * @var string
      */
-    protected $autorestart;
+    protected $autorestart = self::AUTO_RESTART_OFF;
 
     /**
      * Whether to terminate the containers of the service automatically if they stop
@@ -396,14 +399,14 @@ class Service extends AbstractApplicationModel
      *
      * @var string
      */
-    protected $autodestroy;
+    protected $autodestroy = self::AUTO_DESTROY_OFF;
 
     /**
      * List of Docker Cloud roles assigned to this service
      *
      * @var string[]
      */
-    protected $roles = [];
+    protected $roles = ['global'];
 
     /**
      * List of environment variables that would be exposed in the containers if they are linked to this service
@@ -418,7 +421,7 @@ class Service extends AbstractApplicationModel
      *
      * @var bool
      */
-    protected $privileged;
+    protected $privileged = false;
 
     /**
      * Whether the filesystem of every service container is read-only or not
@@ -432,7 +435,7 @@ class Service extends AbstractApplicationModel
      *
      * @var string
      */
-    protected $deployment_strategy;
+    protected $deployment_strategy = self::DEPLOYMENT_STRATEGY_EMPTIEST_NODE;
 
     /**
      * List of tags to be used to deploy the service
@@ -446,7 +449,7 @@ class Service extends AbstractApplicationModel
      *
      * @var bool
      */
-    protected $autoredeploy;
+    protected $autoredeploy = false;
 
     /**
      * A user-friendly name for the service
