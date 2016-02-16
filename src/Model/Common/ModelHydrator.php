@@ -7,6 +7,8 @@ use Zend\Hydrator\ClassMethods;
 use Zend\Hydrator\ExtractionInterface;
 use Zend\Hydrator\Filter\FilterComposite;
 use Zend\Hydrator\HydrationInterface;
+use Zend\Hydrator\ObjectProperty;
+use Zend\Hydrator\Reflection;
 
 class ModelHydrator implements HydrationInterface, ExtractionInterface
 {
@@ -25,18 +27,7 @@ class ModelHydrator implements HydrationInterface, ExtractionInterface
      */
     private function __construct()
     {
-        $this->hydrator = new ClassMethods();
-        $this->hydrator->addFilter('arrayCopy',
-            function ($property) {
-                list($class, $method) = explode('::', $property);
-                if ($method === 'getArrayCopy') {
-                    return false;
-                }
-                unset($class);
 
-                return true;
-            }, FilterComposite::CONDITION_AND
-        );
     }
 
     /**
@@ -58,7 +49,9 @@ class ModelHydrator implements HydrationInterface, ExtractionInterface
      */
     public function extract($object)
     {
-        return $this->hydrator->extract($object);
+        $hydrator = new Reflection();
+
+        return $hydrator->extract($object);
     }
 
     /**
@@ -69,6 +62,8 @@ class ModelHydrator implements HydrationInterface, ExtractionInterface
      */
     public function hydrate(array $data, $object)
     {
-        return $this->hydrator->hydrate($data, $object);
+        $hydrator = new ClassMethods();
+
+        return $hydrator->hydrate($data, $object);
     }
 }

@@ -70,7 +70,7 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
         $MetaData->setLimit(25)
             ->setTotalCount(count($body));
 
-        return $this->mockResponse($status, json_encode([
+        return $this->mockResponse($status, \Zend\Json\Encoder::encode([
             'meta'    => $MetaData->getArrayCopy(),
             'objects' => $body
         ]));
