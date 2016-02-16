@@ -19,6 +19,7 @@
   "require": {
     "php": ">=5.5",
     "guzzlehttp/guzzle": "~6.0",
+    "textalk/websocket": "~1.0",
     "monolog/monolog": "@stable",
     "zendframework/zend-hydrator": "~2",
     "zendframework/zend-filter": "~2",
