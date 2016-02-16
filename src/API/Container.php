@@ -118,7 +118,7 @@ class Container extends AbstractApplicationAPI
     public function exec($uuid, $command, $successCallback = null, $failCallback = null)
     {
         $this->getClient()
-            ->request('GET', $this->getAPINameSpace() . $uuid . '/redeploy/', [
+            ->request('GET', $this->getAPINameSpace() . $uuid . '/exec/', [
                 'query' => [
                     'command' => $command
                 ]
