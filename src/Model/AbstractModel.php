@@ -40,6 +40,7 @@ abstract class AbstractModel
 
     public function toJson()
     {
-        return \Zend\Json\Encoder::encode($this->getArrayCopy());
+        $string= \Zend\Json\Encoder::encode($this->getArrayCopy());
+        return preg_replace('/"__className.*,/','',$string);
     }
 }
