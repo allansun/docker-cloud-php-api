@@ -37,7 +37,7 @@ class Stack extends AbstractApplicationAPI
     {
         return new Model($this->getClient()->request('POST', $this->getAPINameSpace(),
             [
-                'body' =>$Model->toJson()
+                'body' => $Model->toJson()
             ]
         ));
     }
@@ -53,7 +53,7 @@ class Stack extends AbstractApplicationAPI
         $this->validateFilter($filters);
 
         return new GetListResponse($this->getClient()
-            ->request('GET', $this->getAPINameSpace()), ['query' => $filters]);
+            ->request('GET', $this->getAPINameSpace(), ['query' => $filters]));
     }
 
 

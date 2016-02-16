@@ -40,7 +40,7 @@ class Container extends AbstractApplicationAPI
         $this->validateFilter($filters);
 
         return new GetListResponse($this->getClient()
-            ->request('GET', $this->getAPINameSpace()), ['query' => $filters]);
+            ->request('GET', $this->getAPINameSpace(), ['query' => $filters]));
     }
 
 
