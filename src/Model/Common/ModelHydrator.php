@@ -3,6 +3,7 @@
 
 namespace DockerCloud\Model\Common;
 
+use DockerCloud\Model\AbstractModel;
 use Zend\Hydrator\ClassMethods;
 use Zend\Hydrator\ExtractionInterface;
 use Zend\Hydrator\Filter\FilterComposite;
@@ -60,7 +61,16 @@ class ModelHydrator implements HydrationInterface, ExtractionInterface
             }, FilterComposite::CONDITION_AND
         );
 
-        return $hydrator->extract($object);
+        $result = $hydrator->extract($object);
+        array_walk_recursive($result, function (&$value, $key) use ($result) {
+            if (is_null($value)) {
+                unset($result[$key]);
+            }
+            if($value instanceof AbstractModel){
+                $value = $this->extract($value);
+            }
+        });
+        return $result;
     }
 
     /**

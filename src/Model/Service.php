@@ -104,7 +104,7 @@ class Service extends AbstractApplicationModel
      * Set the PID (Process) Namespace mode for the containers
      * (more information https://docs.docker.com/reference/run/#pid-settings-pid)
      *
-     * @var int
+     * @var string
      */
     protected $pid = self::PID_NONE;
 
@@ -599,7 +599,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getPid()
     {
@@ -607,7 +607,7 @@ class Service extends AbstractApplicationModel
     }
 
     /**
-     * @param int $pid
+     * @param string $pid
      *
      * @return $this
      */
