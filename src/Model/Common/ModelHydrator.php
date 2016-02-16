@@ -62,7 +62,7 @@ class ModelHydrator implements HydrationInterface, ExtractionInterface
         );
 
         $resultCopy = $result = $hydrator->extract($object);
-        array_walk_recursive($resultCopy, function (&$value,$key) use(&$result)  {
+        array_walk($resultCopy, function (&$value,$key) use(&$result)  {
             if($value instanceof AbstractModel){
                 $result[$key] = $value->getArrayCopy();
             }
