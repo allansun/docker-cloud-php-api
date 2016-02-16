@@ -5,6 +5,7 @@ namespace DockerCloud\API;
 
 use DockerCloud\Model\Response\ServiceGetListResponse as GetListResponse;
 use DockerCloud\Model\Service as Model;
+use DockerCloud\Model\Stack;
 
 class Service extends AbstractApplicationAPI
 {
@@ -203,19 +204,23 @@ class Service extends AbstractApplicationAPI
     }
 
     /**
-     * @param             $name
-     * @param string|null $stackUri
+     * @param                   $name
+     * @param Stack|string|null $stack
      *
      * @return Model|Model[]|null
      */
-    public function findByName($name, $stackUri = null)
+    public function findByName($name, $stack = null)
     {
-        $GetListResponse = $this->getList(['name' => $name, 'stack' => $stackUri]);
+        if ($stack instanceof Stack) {
+            $stack = $stack->getResourceUri();
+        }
+
+        $GetListResponse = $this->getList(['name' => $name, 'stack' => $stack]);
         if (1 == $GetListResponse->getMeta()->getTotalCount()) {
             return $GetListResponse->getObjects()[0];
         }
 
-        if (1 <= $GetListResponse->getMeta()->getTotalCount() && !$stackUri) {
+        if (1 <= $GetListResponse->getMeta()->getTotalCount() && !$stack) {
             return $GetListResponse->getObjects();
         }
 

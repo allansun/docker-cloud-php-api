@@ -6,6 +6,7 @@ namespace DockerCloud\Test\API;
 
 use DockerCloud\API\Service as API;
 use DockerCloud\Model\Service as Model;
+use DockerCloud\Model\Stack;
 use Faker\Factory as FackerFactory;
 
 class ServiceTest extends AbstractAPITest
@@ -16,7 +17,6 @@ class ServiceTest extends AbstractAPITest
     static public function getMockData()
     {
         return <<<JSON
-
 {
     "autodestroy": "OFF",
     "autoredeploy": false,
@@ -363,10 +363,12 @@ JSON;
         $Model = new Model(json_decode($this->getMockData()));
         $Model->setName('test');
 
+        $Stack = new Stack();
+
         $this->mockGetListResponse(200, $Model);
 
         $API   = new API();
-        $Model = $API->findByName('test', 'stack-uri');
+        $Model = $API->findByName('test', $Stack);
         $this->assertInstanceOf(Model::class, $Model);
         $this->assertEquals('test', $Model->getName());
     }
@@ -384,7 +386,10 @@ JSON;
     {
         $Model = new Model(json_decode($this->getMockData()));
 
-        $this->mockGetListResponse(200, [$Model->setStack('test1'), $Model->setStack('test2')]);
+        $this->mockGetListResponse(200, [
+            $Model->setStack('test1'),
+            $Model->setStack('test2'),
+        ]);
 
         $API = new API();
         $this->assertEquals(2, count($API->findByName('test')));
