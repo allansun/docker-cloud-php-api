@@ -53,40 +53,36 @@ class Client
      */
     public function request($method, $uri, $options = [], $successCallback = null, $failCallback = null)
     {
-        $json = null;
-        Logger::getInstance()->log('URI ' . $uri);
+        $json    = null;
         $options = array_merge($this->defaultOptions, $options);
-        try {
-            if (!$successCallback && !$failCallback) {
-                // If there's no callbacks defined we assume this is a RESTful request
-                $guzzle = new GuzzleHttp\Client(['base_uri' => self::BASE_URL_REST]);
-                $res    = $guzzle->request($method, $uri, $options);
-                if ($res->getHeader('content-type')[0] == 'application/json') {
-                    $contents = $res->getBody()->getContents();
-                    Logger::getInstance()->log($contents);
-                    $json = json_decode($contents);
-                } else {
-                    throw new Exception("Server did not send JSON. Response was \"{$res->getBody()->getContents()}\"");
-                }
+
+        Logger::getInstance()->log($method . ' ' . $uri . ' ' . json_encode($options));
+
+        if (!$successCallback && !$failCallback) {
+            // If there's no callbacks defined we assume this is a RESTful request
+            $guzzle = new GuzzleHttp\Client(['base_uri' => self::BASE_URL_REST]);
+            $res    = $guzzle->request($method, $uri, $options);
+            if ($res->getHeader('content-type')[0] == 'application/json') {
+                $contents = $res->getBody()->getContents();
+                Logger::getInstance()->log($contents);
+                $json = json_decode($contents);
             } else {
-                // Use the STREAM API end point
-                $guzzle = new GuzzleHttp\Client(['base_uri' => self::BASE_URL_STREAM]);
-                if (!($successCallback instanceof \Closure)) {
-                    $successCallback = function (GuzzleHttp\Psr7\Response $response) {
-                        Logger::getInstance()->log($response->getBody());
-                    };
-                }
-                if (!($failCallback instanceof \Closure)) {
-                    $failCallback = function (GuzzleHttp\Exception\ServerException $exception) {
-                        Logger::getInstance()->log($exception->getResponse()->getBody());
-                    };
-                }
-                $guzzle->requestAsync($method, $uri, $options)->then($successCallback, $failCallback)->wait();
+                throw new Exception("Server did not send JSON. Response was \"{$res->getBody()->getContents()}\"");
             }
-        } catch (GuzzleHttp\Exception\ClientException $ce) {
-            Logger::getInstance()->log('Headers', $ce->getRequest()->getHeaders());
-            Logger::getInstance()->log($ce->getResponse()->getBody()->getContents());
-            throw $ce;
+        } else {
+            // Use the STREAM API end point
+            $guzzle = new GuzzleHttp\Client(['base_uri' => self::BASE_URL_STREAM]);
+            if (!($successCallback instanceof \Closure)) {
+                $successCallback = function (GuzzleHttp\Psr7\Response $response) {
+                    Logger::getInstance()->log($response->getBody());
+                };
+            }
+            if (!($failCallback instanceof \Closure)) {
+                $failCallback = function (GuzzleHttp\Exception\ServerException $exception) {
+                    Logger::getInstance()->log($exception->getResponse()->getBody());
+                };
+            }
+            $guzzle->requestAsync($method, $uri, $options)->then($successCallback, $failCallback)->wait();
         }
 
         return $json;
