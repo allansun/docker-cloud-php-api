@@ -69,10 +69,7 @@ class Node extends AbstractInfrastructrueAPI
         return new Model($this->getClient()->request('PATCH',
             $this->getAPINameSpace() . $Model->getUuid() . '/',
             [
-                'body' => json_encode([
-                    'nickname' => $Model->getNickname(),
-                    'tags'     => $Model->getTags()
-                ])
+                'body' => $Model->toJson()
             ]
         ));
     }

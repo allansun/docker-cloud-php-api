@@ -15,13 +15,16 @@ use Monolog\Handler\StreamHandler;
  */
 class LoggerTest extends \PHPUnit_Framework_TestCase
 {
-    public function testDebugEnvironment(){
-        putenv('DEBUG=true');
-        $this->assertInstanceOf(StreamHandler::class,Logger::reInitiate()->getLogger()->getHandlers()[0]);
+    public function testProductionEnvironment()
+    {
+        putenv('DEBUG');
+        $this->assertInstanceOf(NullHandler::class, Logger::reInitiate()->getLogger()->getHandlers()[0]);
     }
 
-    public function testProductionEnvironment(){
-        putenv('DEBUG');
-        $this->assertInstanceOf(NullHandler::class,Logger::reInitiate()->getLogger()->getHandlers()[0]);
+    public function testDebugEnvironment()
+    {
+        putenv('DEBUG=true');
+        $this->assertInstanceOf(StreamHandler::class, Logger::reInitiate()->getLogger()->getHandlers()[0]);
     }
+
 }

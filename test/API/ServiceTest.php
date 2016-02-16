@@ -137,7 +137,8 @@ class ServiceTest extends AbstractAPITest
     "WORDPRESS_STACKABLE_PORT_80_TCP_ADDR": "wordpress-stackable-1.admin.cont.dockerapp.io",
     "WORDPRESS_STACKABLE_PORT_80_TCP_PORT": "49153",
     "WORDPRESS_STACKABLE_PORT_80_TCP_PROTO": "tcp",
-    "WORDPRESS_STACKABLE_DOCKERCLOUD_API_URL": "https://cloud.docker.com/api/app/v1/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"
+    "WORDPRESS_STACKABLE_DOCKERCLOUD_API_URL":
+    "https://cloud.docker.com/api/app/v1/service/adeebc1b-1b81-4af0-b8f2-cefffc69d7fb/"
     },
     "linked_from_service": [
     {
@@ -198,7 +199,7 @@ JSON;
 
         $Facker     = FackerFactory::create();
         $ServiceAPI = new API();
-        $Model      = new Model();
+        $Model      = new Model($this->getMockData());
         $Model->setName('test-' . $Facker->uuid);
         $Model = $ServiceAPI->create($Model);
         $this->assertInstanceOf(Model::class, $Model);

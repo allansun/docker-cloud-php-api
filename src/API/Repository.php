@@ -27,11 +27,7 @@ class Repository extends AbstractRepoAPI
     {
         return new Model($this->getClient()->request('POST', $this->getAPINameSpace(),
             [
-                'body' => json_encode([
-                    'name'     => $Model->getName(),
-                    'username' => $username,
-                    'password' => $passoword,
-                ])
+                'body' => $Model->toJson()
             ]
         ));
     }
@@ -76,7 +72,7 @@ class Repository extends AbstractRepoAPI
     {
         return new Model($this->getClient()->request('PATCH', $this->getAPINameSpace() . $name . '/',
             [
-                'body' => json_encode([
+                'body' => \Zend\Json\Json::encode([
                     'username' => $username,
                     'password' => $password,
                 ])

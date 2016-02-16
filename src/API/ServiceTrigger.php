@@ -44,10 +44,7 @@ class ServiceTrigger extends AbstractAPI
     {
         return new Model($this->getClient()->request('POST', $this->getAPINameSpace(),
             [
-                'body' => json_encode([
-                    'name'      => $Model->getName(),
-                    'operation' => $Model->getOperation(),
-                ])
+                'body' => $Model->toJson()
             ]
         ));
     }

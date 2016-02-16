@@ -28,29 +28,7 @@ class Service extends AbstractApplicationAPI
     {
         return new Model($this->getClient()->request('POST', $this->getAPINameSpace(),
             [
-                'body' => json_encode([
-                    'image'                 => $Model->getImageName(),
-                    'name'                  => $Model->getName(),
-                    'target_num_containers' => $Model->getTargetNumContainers(),
-                    'run_command'           => $Model->getRunCommand(),
-                    'entrypoint'            => $Model->getEntrypoint(),
-                    'container_ports'       => $Model->getContainerPorts(),
-                    'container_envvars'     => $Model->getContainerEnvvars(),
-                    'linked_to_service'     => $Model->getLinkedToService(),
-                    'bindings'              => $Model->getBindings(),
-                    'autorestart'           => $Model->getAutorestart(),
-                    'autodestroy'           => $Model->getAutodestroy(),
-                    'sequential_deployment' => $Model->isSequentialDeployment(),
-                    'roles'                 => $Model->getRoles(),
-                    'privileged'            => $Model->isPrivileged(),
-                    'deployment_strategy'   => $Model->getDeploymentStrategy(),
-                    'tags'                  => $Model->getTags(),
-                    'autoredeploy'          => $Model->isAutoredeploy(),
-                    'net'                   => $Model->getNet(),
-                    'pid'                   => $Model->getPid(),
-                    'working_dir'           => $Model->getWorkingDir(),
-                    'nickname'              => $Model->getNickname(),
-                ])
+                'body' => $Model->toJson()
             ]
         ));
     }
@@ -121,7 +99,7 @@ class Service extends AbstractApplicationAPI
         return new Model($this->getClient()->request('PATCH',
             $this->getAPINameSpace() . $Model->getUuid() . '/',
             [
-                'body' => json_encode([
+                'body' => \Zend\Json\Json::encode([
                     'autorestart'           => $Model->getAutorestart(),
                     'autodestroy'           => $Model->getAutodestroy(),
                     'container_envvars'     => $Model->getContainerEnvvars(),

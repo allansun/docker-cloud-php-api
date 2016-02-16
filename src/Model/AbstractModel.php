@@ -37,4 +37,8 @@ abstract class AbstractModel
     {
         return ModelHydrator::getInstance()->hydrate((array)$data, $this);
     }
+
+    public function toJson(){
+        return \Zend\Json\Encoder::encode($this->getArrayCopy());
+    }
 }

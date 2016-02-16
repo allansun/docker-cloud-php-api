@@ -40,15 +40,7 @@ class NodeCluster extends AbstractInfrastructrueAPI
     {
         return new Model($this->getClient()->request('POST', $this->getAPINameSpace(),
             [
-                'body' => json_encode([
-                    'name'             => $Model->getName(),
-                    'node_type'        => $Model->getNodeType(),
-                    'region'           => $Model->getRegion(),
-                    'disk'             => $Model->getDisk(),
-                    'nickname'         => $Model->getNickname(),
-                    'target_num_nodes' => $Model->getTargetNumNodes(),
-                    'provider_options' => (array)$Model->getProviderOptions()
-                ])
+                'body' => $Model->toJson()
             ]
         ));
     }
@@ -92,7 +84,7 @@ class NodeCluster extends AbstractInfrastructrueAPI
         return new Model($this->getClient()->request('PATCH',
             $this->getAPINameSpace() . $Model->getUuid() . '/',
             [
-                'body' => json_encode([
+                'body' => \Zend\Json\Json::encode([
                     'target_num_nodes' => $Model->getTargetNumNodes(),
                     'tags'             => $Model->getTags()
                 ])

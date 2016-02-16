@@ -28,6 +28,7 @@ class Client
      */
     private function __construct($username, $apiKey)
     {
+        \Zend\Json\Json::$useBuiltinEncoderDecoder = true;
         $config = [
             'base_uri' => self::BASE_URL_REST,
         ];
