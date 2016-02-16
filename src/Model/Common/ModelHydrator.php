@@ -61,13 +61,13 @@ class ModelHydrator implements HydrationInterface, ExtractionInterface
             }, FilterComposite::CONDITION_AND
         );
 
-        $result = $hydrator->extract($object);
-        array_walk_recursive($result, function (&$value, $key) use ($result) {
+        $resultCopy = $result = $hydrator->extract($object);
+        array_walk_recursive($resultCopy, function (&$value,$key) use(&$result)  {
+            if($value instanceof AbstractModel){
+                $result[$key] = $value->getArrayCopy();
+            }
             if (is_null($value)) {
                 unset($result[$key]);
-            }
-            if($value instanceof AbstractModel){
-                $value = $this->extract($value);
             }
         });
         return $result;
