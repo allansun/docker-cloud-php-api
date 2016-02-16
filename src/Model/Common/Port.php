@@ -16,7 +16,7 @@ class Port extends AbstractModel
      *
      * @var string
      */
-    protected $protocol;
+    protected $protocol = self::PROTOCOL_TCP;
 
     /**
      * The published port number inside the container
