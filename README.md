@@ -15,7 +15,7 @@ Add a dependency on dockercloud/api to your project's `composer.json` by utilizi
 ```json
 {
     "require-dev": {
-        "dockerlcoud/api": "@stable"
+        "dockercloud/api": "@stable"
     }
 }
 ```
