@@ -5,6 +5,7 @@ namespace DockerCloud;
 
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
+use Psr\Log\LoggerInterface;
 
 class Logger
 {
@@ -14,7 +15,7 @@ class Logger
     static private $instance;
 
     /**
-     * @var \Monolog\Logger
+     * @var LoggerInterface|\Monolog\Logger
      */
     private $logger;
 
@@ -57,11 +58,23 @@ class Logger
     }
 
     /**
-     * @return \Monolog\Logger
+     * @return LoggerInterface|\Monolog\Logger
      */
     public function getLogger()
     {
         return $this->logger;
+    }
+
+    /**
+     * @param LoggerInterface $logger
+     *
+     * @return $this
+     */
+    public function setLogger($logger)
+    {
+        $this->logger = $logger;
+
+        return $this;
     }
 
     /**
