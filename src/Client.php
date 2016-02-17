@@ -57,13 +57,13 @@ class Client
         if (!$successCallback && !$failCallback) {
             $json = null;
             // If there's no callbacks defined we assume this is a RESTful request
-            Logger::getInstance()->log($method . ' ' . $uri . ' ' . json_encode($options));
+            Logger::getInstance()->debug($method . ' ' . $uri . ' ' . json_encode($options));
             $options = array_merge($this->defaultOptions, $options);
             $guzzle  = new GuzzleHttp\Client(['base_uri' => self::BASE_URL_REST]);
             $res     = $guzzle->request($method, $uri, $options);
             if ($res->getHeader('content-type')[0] == 'application/json') {
                 $contents = $res->getBody()->getContents();
-                Logger::getInstance()->log($contents);
+                Logger::getInstance()->debug($contents);
                 $json = json_decode($contents);
             } else {
                 throw new Exception("Server did not send JSON. Response was \"{$res->getBody()->getContents()}\"");
@@ -79,12 +79,12 @@ class Client
 
             $WSClient = new WebSocket\Client($Uri);
 
-            Logger::getInstance()->log($Uri);
+            Logger::getInstance()->debug($Uri);
 
             if (!($successCallback instanceof \Closure)) {
                 $successCallback = function ($response) use ($WSClient) {
                     if ($json = json_decode($response)) {
-                        Logger::getInstance()->log($json->output);
+                        Logger::getInstance()->info($json->output);
                     } else {
                         throw new Exception($response);
                     }
@@ -92,7 +92,7 @@ class Client
             }
             if (!($failCallback instanceof \Closure)) {
                 $failCallback = function (\Exception $exception) {
-                    Logger::getInstance()->log($exception->getMessage());
+                    Logger::getInstance()->info($exception->getMessage());
                 };
             }
 

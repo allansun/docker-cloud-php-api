@@ -3,7 +3,6 @@
 
 namespace DockerCloud;
 
-use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Psr\Log\LoggerInterface;
 
@@ -25,11 +24,7 @@ class Logger
     private function __construct()
     {
         $this->logger = new \Monolog\Logger('DockerCloud');
-        if (getenv('DEBUG')) {
-            $this->logger->pushHandler(new StreamHandler('php://stdout'));
-        } else {
-            $this->logger->pushHandler(new NullHandler());
-        }
+        $this->logger->pushHandler(new StreamHandler('php://stdout'));
     }
 
     /**
@@ -50,11 +45,18 @@ class Logger
      *
      * @return $this
      */
-    public function log($message, $extra = [])
+    public function debug($message, $extra = [])
     {
-        $this->logger->info($message, $extra);
+        if (getenv('DEBUG')) {
+            $this->logger->debug($message, $extra);
+        }
 
         return $this;
+    }
+
+    public function info($message, $extra = [])
+    {
+        $this->logger->info($message, $extra);
     }
 
     /**
