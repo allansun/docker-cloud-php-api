@@ -119,9 +119,7 @@ class Container extends AbstractApplicationAPI
     {
         $this->getClient()
             ->request('GET', $this->getAPINameSpace() . $uuid . '/exec/', [
-                'query' => [
-                    'command' => $command
-                ]
+                'command' => $command
             ], $successCallback, $failCallback);
     }
 

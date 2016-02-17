@@ -1,5 +1,5 @@
 {
-  "name": "allansun/docker-cloud-php-api",
+  "name": "dockercloud/docker-cloud-php-api",
   "description": "A PHP Wrapper for DockerCloud API",
   "type": "library",
   "keywords": [
@@ -19,13 +19,14 @@
   "require": {
     "php": ">=5.5",
     "guzzlehttp/guzzle": "~6.0",
-    "textalk/websocket": "~1.0",
     "monolog/monolog": "@stable",
     "zendframework/zend-hydrator": "~2",
     "zendframework/zend-filter": "~2",
     "zendframework/zend-servicemanager": "~2",
     "zendframework/zend-serializer": "~2",
-    "zendframework/zend-eventmanager": "~2"
+    "zendframework/zend-eventmanager": "~2",
+    "zendframework/zend-uri": "~2",
+    "allansun/websocket": "dev-master"
   },
   "require-dev": {
     "phpunit/phpunit": "~5.0",

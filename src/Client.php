@@ -4,11 +4,14 @@
 namespace DockerCloud;
 
 use GuzzleHttp;
+use WebSocket;
+use Zend\Json\Json;
+use Zend\Uri\Uri;
 
 class Client
 {
     const BASE_URL_REST = 'https://cloud.docker.com';
-    const BASE_URL_STREAM = 'ws.cloud.docker.com';
+    const BASE_URL_STREAM = 'wss://ws.cloud.docker.com';
 
     /**
      * @var Client
@@ -21,11 +24,6 @@ class Client
     private $defaultOptions = [];
 
     /**
-     * @var \WebSocket\Client
-     */
-    protected $WEClient;
-
-    /**
      * Client constructor.
      *
      * @param $username
@@ -33,20 +31,14 @@ class Client
      */
     private function __construct($username, $apiKey)
     {
-        \Zend\Json\Json::$useBuiltinEncoderDecoder = true;
-        $config                                    = [
-            'base_uri' => self::BASE_URL_REST,
-        ];
+        Json::$useBuiltinEncoderDecoder = true;
 
-        $this->guzzle         = new GuzzleHttp\Client($config);
         $this->defaultOptions = [
             'auth'    => [$username, $apiKey],
             'headers' => [
                 'Accepts' => 'application/json'
             ]
         ];
-
-        $this->webSocketUri = "wss://${username}:${apiKey}@" . self::BASE_URL_STREAM;
     }
 
     /**
@@ -56,20 +48,19 @@ class Client
      * @param null|bool|\Closure $successCallback
      * @param null|bool|\Closure $failCallback
      *
-     * @return null|\StdClass
+     * @return bool|null|\StdClass
      * @throws Exception
      */
     public function request($method, $uri, $options = [], $successCallback = null, $failCallback = null)
     {
-        $json    = null;
-        $options = array_merge($this->defaultOptions, $options);
-
-        Logger::getInstance()->log($method . ' ' . $uri . ' ' . json_encode($options));
 
         if (!$successCallback && !$failCallback) {
+            $json = null;
             // If there's no callbacks defined we assume this is a RESTful request
-            $guzzle = new GuzzleHttp\Client(['base_uri' => self::BASE_URL_REST]);
-            $res    = $guzzle->request($method, $uri, $options);
+            Logger::getInstance()->log($method . ' ' . $uri . ' ' . json_encode($options));
+            $options = array_merge($this->defaultOptions, $options);
+            $guzzle  = new GuzzleHttp\Client(['base_uri' => self::BASE_URL_REST]);
+            $res     = $guzzle->request($method, $uri, $options);
             if ($res->getHeader('content-type')[0] == 'application/json') {
                 $contents = $res->getBody()->getContents();
                 Logger::getInstance()->log($contents);
@@ -77,13 +68,26 @@ class Client
             } else {
                 throw new Exception("Server did not send JSON. Response was \"{$res->getBody()->getContents()}\"");
             }
+
+            return $json;
         } else {
             // Use the STREAM API end point
+            $Uri = new Uri(self::BASE_URL_STREAM);
+            $Uri->setUserInfo($this->defaultOptions['auth'][0] . ':' . $this->defaultOptions['auth'][1]);
+            $Uri->setPath($uri);
+            $Uri->setQuery($options);
 
-            $WSClient = new \WebSocket\Client($this->webSocketUri . $uri . http_build_query($options));
+            $WSClient = new WebSocket\Client($Uri);
+
+            Logger::getInstance()->log($Uri);
+
             if (!($successCallback instanceof \Closure)) {
-                $successCallback = function ($response) {
-                    Logger::getInstance()->log($response);
+                $successCallback = function ($response) use ($WSClient) {
+                    if ($json = json_decode($response)) {
+                        Logger::getInstance()->log($json->output);
+                    } else {
+                        throw new Exception($response);
+                    }
                 };
             }
             if (!($failCallback instanceof \Closure)) {
@@ -91,15 +95,17 @@ class Client
                     Logger::getInstance()->log($exception->getMessage());
                 };
             }
+
             try {
-                $WSClient->send('');
-                $successCallback($WSClient->receive());
+                while ($response = $WSClient->receive()) {
+                    $successCallback($response);
+                }
             } catch (\Exception $e) {
                 $failCallback($e);
             }
-        }
 
-        return $json;
+            return true;
+        }
     }
 
     /**

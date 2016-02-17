@@ -4,6 +4,7 @@
 namespace DockerCloud\Test;
 
 
+use DockerCloud\API\Container;
 use DockerCloud\Client;
 use DockerCloud\Exception;
 use GuzzleHttp;
