@@ -1,5 +1,5 @@
 {
-  "name": "dockercloud/docker-cloud-php-api",
+  "name": "dockercloud/api",
   "description": "A PHP Wrapper for DockerCloud API",
   "type": "library",
   "keywords": [

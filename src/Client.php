@@ -75,7 +75,7 @@ class Client
             $Uri = new Uri(self::BASE_URL_STREAM);
             $Uri->setUserInfo($this->defaultOptions['auth'][0] . ':' . $this->defaultOptions['auth'][1]);
             $Uri->setPath($uri);
-            $Uri->setQuery($options);
+            $Uri->setQuery($options['query']);
 
             $WSClient = new WebSocket\Client($Uri);
 
