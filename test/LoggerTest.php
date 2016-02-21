@@ -14,6 +14,18 @@ use Monolog\Handler\StreamHandler;
  */
 class LoggerTest extends \PHPUnit_Framework_TestCase
 {
+    static $originalDebugMode = false;
+
+    static public function setUpBeforeClass()
+    {
+        static::$originalDebugMode = getenv('DEBUG');
+    }
+
+    static public function tearDownAfterClass()
+    {
+        putenv('DEBUG=' . static::$originalDebugMode);
+    }
+
     public function testProductionEnvironment()
     {
         putenv('DEBUG');
