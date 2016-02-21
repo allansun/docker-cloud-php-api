@@ -4,7 +4,6 @@
 namespace DockerCloud\Test;
 
 
-use DockerCloud\API\Container;
 use DockerCloud\Client;
 use DockerCloud\Exception;
 use GuzzleHttp;
@@ -57,6 +56,17 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         Client::getInstance()->request('GET', '/');
     }
 
+    public function testStreamAPI()
+    {
+        Client::getInstance()->setDefaultOption('handler',
+            HandlerStack::create(new MockHandler([
+                new Response(200, ['Content-Type' => 'application/text'], '{"output":"Normal result"}')
+            ]))
+        );
+
+        Client::getInstance()->request('GET', '/', ['query' => ['ok' => 'ok']], true, true);
+    }
+
     public function testStreamAPIWithFailedResponse()
     {
         Client::getInstance()->setDefaultOption('handler',
@@ -65,6 +75,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             ]))
         );
 
-        Client::getInstance()->request('GET', '/', [], true, true);
+        Client::getInstance()->request('GET', '/', ['query' => ['ok' => 'ok']], true, true);
     }
 }

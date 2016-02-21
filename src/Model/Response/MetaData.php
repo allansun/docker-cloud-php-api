@@ -14,7 +14,7 @@ class MetaData extends AbstractModel
     protected $limit;
 
     /**
-     * @var mixed
+     * @var string
      */
     protected $next;
 
@@ -24,7 +24,7 @@ class MetaData extends AbstractModel
     protected $offset;
 
     /**
-     * @var mixed
+     * @var string
      */
     protected $previous;
 
@@ -42,7 +42,7 @@ class MetaData extends AbstractModel
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getNext()
     {
@@ -58,7 +58,7 @@ class MetaData extends AbstractModel
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getPrevious()
     {
@@ -86,7 +86,7 @@ class MetaData extends AbstractModel
     }
 
     /**
-     * @param mixed $next
+     * @param string $next
      *
      * @return $this
      */
@@ -110,7 +110,7 @@ class MetaData extends AbstractModel
     }
 
     /**
-     * @param mixed $previous
+     * @param string $previous
      *
      * @return $this
      */

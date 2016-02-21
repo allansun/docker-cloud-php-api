@@ -17,7 +17,7 @@ class MetaDataTest extends AbstractModelTest
     protected function getMockData()
     {
         $data = new Model(
-            json_decode('{"meta":{"limit":25,"next":null,"offset":null,"previous":null,"total_count":1}')
+            json_decode('{"limit":25,"next":"next","offset":1,"previous":"previouse","total_count":1}',true)
         );
 
         return \Zend\Json\Encoder::encode($data);

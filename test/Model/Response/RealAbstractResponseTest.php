@@ -8,7 +8,7 @@ use DockerCloud\Exception;
 use DockerCloud\Model\Response\AbstractResponse;
 use DockerCloud\Test\API\AbstractAPITest;
 
-class RealAbstractResponse extends AbstractAPITest
+class RealAbstractResponseTest extends AbstractAPITest
 {
     public function testConstructWithObject()
     {

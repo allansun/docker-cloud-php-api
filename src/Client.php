@@ -75,19 +75,17 @@ class Client
             $Uri = new Uri(self::BASE_URL_STREAM);
             $Uri->setUserInfo($this->defaultOptions['auth'][0] . ':' . $this->defaultOptions['auth'][1]);
             $Uri->setPath($uri);
-            $Uri->setQuery($options['query']);
+            if (isset($options['query'])) {
+                $Uri->setQuery($options['query']);
+            }
 
             $WSClient = new WebSocket\Client($Uri);
 
             Logger::getInstance()->debug($Uri);
 
             if (!($successCallback instanceof \Closure)) {
-                $successCallback = function ($response) use ($WSClient) {
-                    if ($json = json_decode($response)) {
-                        Logger::getInstance()->info($json->output);
-                    } else {
-                        throw new Exception($response);
-                    }
+                $successCallback = function ($response) {
+                    Logger::getInstance()->info(json_decode($response)->output);
                 };
             }
             if (!($failCallback instanceof \Closure)) {
