@@ -4,7 +4,8 @@ This is a PHP FULL implementation of [DockerCloud](http://cloud.docker.com)'s [A
 
 [![Minimum PHP Version](https://img.shields.io/badge/php-%3E%3D%205.5-8892BF.svg?style=plastic)](https://php.net/)
 [![Latest Stable Version](https://poser.pugx.org/dockercloud/api/version)](https://packagist.org/packages/dockercloud/api)
-[![Build Status](https://img.shields.io/travis/allansun/docker-cloud-php-api/master.svg?style=plastic)](https://travis-ci.org/allansun/docker-cloud-php-api)
+[![Build Status](https://travis-ci.org/allansun/docker-cloud-php-api.svg?branch=master)](https://travis-ci.org/allansun/docker-cloud-php-api)
+[![Coverage Status](https://coveralls.io/repos/github/allansun/docker-cloud-php-api/badge.svg?branch=master)](https://coveralls.io/github/allansun/docker-cloud-php-api?branch=master)
 [![Gitter](https://badges.gitter.im/allansun/docker-cloud-php-api.svg?style=plastic)](https://gitter.im/allansun/docker-cloud-php-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ## Installation

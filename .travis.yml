@@ -8,9 +8,14 @@ sudo: false
 
 before_install:
   - composer self-update
+  - rm -rf build
+  - mkdir build
 
 install:
   - travis_retry composer install --no-interaction --prefer-source
 
 script:
-  - phpunit --configuration test/phpunit.xml.dist
+  - phpunit --configuration test/phpunit.xml.dist --coverage-clover build/clover.xml
+
+after_success:
+  - travis_retry php vendor/bin/coveralls
