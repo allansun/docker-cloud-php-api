@@ -6,7 +6,7 @@ namespace DockerCloud\Model;
 
 class Stack extends AbstractApplicationModel
 {
-    const STATE_NOT_RUNNING = 'Not Running';
+    const STATE_NOT_RUNNING = 'Not running';
     const STATE_STARTING = 'Starting';
     const STATE_RUNNING = 'Running';
     const STATE_PARTLY_RUNNING = 'Partly running';
