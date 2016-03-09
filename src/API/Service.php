@@ -199,8 +199,8 @@ class Service extends AbstractApplicationAPI
         }
 
         $GetListResponse = $this->getList(['name' => $name, 'stack' => $stack]);
-        if (1 == $GetListResponse->getMeta()->getTotalCount()) {
-            return $GetListResponse->getObjects()[0];
+        if (1 <= $GetListResponse->getMeta()->getTotalCount()) {
+            return $GetListResponse->getObjects()[$GetListResponse->getMeta()->getTotalCount() - 1];
         }
 
         if (1 <= $GetListResponse->getMeta()->getTotalCount() && !$stack) {
