@@ -342,7 +342,7 @@ JSON;
         $this->mockResponse(200, $this->getMockData());
 
         $API   = new API();
-        $Model = $API->redeploy($Model->getUuid());
+        $Model = $API->redeploy($Model->getUuid(), true);
         $this->assertInstanceOf(Model::class, $Model);
     }
 

@@ -37,7 +37,7 @@ class Stack extends AbstractApplicationAPI
     {
         return new Model($this->getClient()->request('POST', $this->getAPINameSpace(),
             [
-                'body' => $Model->toJson()
+                'body' => $Model->toJson(),
             ]
         ));
     }
@@ -80,8 +80,8 @@ class Stack extends AbstractApplicationAPI
             $this->getAPINameSpace() . $Model->getUuid() . '/',
             [
                 'body' => \Zend\Json\Json::encode([
-                    'services' => $Model->getServices()
-                ])
+                    'services' => $Model->getServices(),
+                ]),
             ]
         ));
     }
@@ -151,8 +151,9 @@ class Stack extends AbstractApplicationAPI
     public function findByName($name)
     {
         $GetListResponse = $this->getList(['name' => $name]);
-        if (1 == $GetListResponse->getMeta()->getTotalCount()) {
-            return $GetListResponse->getObjects()[0];
+        $totalCount      = $GetListResponse->getMeta()->getTotalCount();
+        if (1 <= $totalCount) {
+            return $GetListResponse->getObjects()[$totalCount - 1];
         }
 
         return null;

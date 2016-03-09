@@ -6,6 +6,7 @@ namespace DockerCloud\API;
 use DockerCloud\Model\Response\ServiceGetListResponse as GetListResponse;
 use DockerCloud\Model\Service as Model;
 use DockerCloud\Model\Stack;
+use Zend\Json\Json;
 
 class Service extends AbstractApplicationAPI
 {
@@ -28,7 +29,7 @@ class Service extends AbstractApplicationAPI
     {
         return new Model($this->getClient()->request('POST', $this->getAPINameSpace(),
             [
-                'body' => $Model->toJson()
+                'body' => $Model->toJson(),
             ]
         ));
     }
@@ -99,7 +100,7 @@ class Service extends AbstractApplicationAPI
         return new Model($this->getClient()->request('PATCH',
             $this->getAPINameSpace() . $Model->getUuid() . '/',
             [
-                'body' => \Zend\Json\Json::encode([
+                'body' => Json::encode([
                     'autorestart'           => $Model->getAutorestart(),
                     'autodestroy'           => $Model->getAutodestroy(),
                     'container_envvars'     => $Model->getContainerEnvvars(),
@@ -121,7 +122,7 @@ class Service extends AbstractApplicationAPI
                     'pid'                   => $Model->getPid(),
                     'working_dir'           => $Model->getWorkingDir(),
                     'nickname'              => $Model->getNickname(),
-                ])
+                ]),
             ]
         ));
     }
@@ -160,14 +161,18 @@ class Service extends AbstractApplicationAPI
     }
 
     /**
-     * @param $uuid
+     * @param      $uuid
+     *
+     * @param bool $isReuseVolumes
      *
      * @return Model
      * @throws \DockerCloud\Exception
      */
-    public function redeploy($uuid)
+    public function redeploy($uuid, $isReuseVolumes = true)
     {
-        return new Model($this->getClient()->request('POST', $this->getAPINameSpace() . $uuid . '/redeploy/'));
+        return new Model($this->getClient()->request('POST', $this->getAPINameSpace() . $uuid . '/redeploy/', [
+            'body' => ['reuse_volumes' => $isReuseVolumes,],
+        ]));
     }
 
     /**
