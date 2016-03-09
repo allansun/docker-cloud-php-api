@@ -366,10 +366,11 @@ JSON;
         $Model->setName('test');
 
         $Stack = new Stack();
-
+        $Stack->setResourceUri('some thing');
         $this->mockGetListResponse(200, $Model);
 
         $API   = new API();
+
         $Model = $API->findByName('test', $Stack);
         $this->assertInstanceOf(Model::class, $Model);
         $this->assertEquals('test', $Model->getName());
@@ -395,5 +396,20 @@ JSON;
 
         $API = new API();
         $this->assertEquals(2, count($API->findByName('test')));
+    }
+
+    /**
+     * @param Model $Model
+     *
+     * @depends testCreate
+     */
+    public function testUpdateLinkedToService(Model $Model)
+    {
+        $this->mockResponse(200, $this->getMockData());
+
+        $API = new API();
+        $Model->setTags(['unit-test-update']);
+        $Model = $API->updateLinkedToService($Model);
+        $this->assertInstanceOf(Model::class, $Model);
     }
 }

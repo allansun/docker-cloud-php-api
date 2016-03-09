@@ -171,7 +171,9 @@ class Service extends AbstractApplicationAPI
     public function redeploy($uuid, $isReuseVolumes = true)
     {
         return new Model($this->getClient()->request('POST', $this->getAPINameSpace() . $uuid . '/redeploy/', [
-            'body' => ['reuse_volumes' => $isReuseVolumes,],
+            'body' => Json::encode([
+                'reuse_volumes' => $isReuseVolumes,
+            ]),
         ]));
     }
 
@@ -199,7 +201,7 @@ class Service extends AbstractApplicationAPI
         }
 
         $GetListResponse = $this->getList(['name' => $name, 'stack' => $stack]);
-        if (1 <= $GetListResponse->getMeta()->getTotalCount()) {
+        if (1 <= $GetListResponse->getMeta()->getTotalCount() && $stack) {
             return $GetListResponse->getObjects()[$GetListResponse->getMeta()->getTotalCount() - 1];
         }
 
@@ -208,5 +210,25 @@ class Service extends AbstractApplicationAPI
         }
 
         return null;
+    }
+
+    /**
+     * Only update linked_to_service field so the DockerCloud API won't prompt need to redeploy
+     *
+     * @param Model $Model
+     *
+     * @return Model
+     * @throws \DockerCloud\Exception
+     */
+    public function updateLinkedToService(Model $Model)
+    {
+        return new Model($this->getClient()->request('PATCH',
+            $this->getAPINameSpace() . $Model->getUuid() . '/',
+            [
+                'body' => Json::encode([
+                    'linked_to_service' => $Model->getLinkedToService(),
+                ]),
+            ]
+        ));
     }
 }

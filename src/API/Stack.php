@@ -6,6 +6,7 @@ namespace DockerCloud\API;
 use DockerCloud\Model\Response\StackGetListResponse as GetListResponse;
 use DockerCloud\Model\Stack as Model;
 use Symfony\Component\Yaml\Yaml;
+use Zend\Json\Json;
 
 class Stack extends AbstractApplicationAPI
 {
@@ -79,7 +80,7 @@ class Stack extends AbstractApplicationAPI
         return new Model($this->getClient()->request('PATCH',
             $this->getAPINameSpace() . $Model->getUuid() . '/',
             [
-                'body' => \Zend\Json\Json::encode([
+                'body' => Json::encode([
                     'services' => $Model->getServices(),
                 ]),
             ]
@@ -127,7 +128,7 @@ class Stack extends AbstractApplicationAPI
      */
     public function export($uuid)
     {
-        return Yaml::dump(json_decode(\Zend\Json\Json::encode(
+        return Yaml::dump(json_decode(Json::encode(
             $this->getClient()->request('POST', $this->getAPINameSpace() . $uuid . '/export/')
         ), true));
     }
