@@ -44,4 +44,13 @@ class Event extends AbstractAuditAPI
             ->request('GET', $this->getAPINameSpace(), [], $successCallback, $failCallback);
     }
 
+    /**
+     * @param $uri
+     *
+     * @throws \DockerCloud\Exception
+     */
+    public function getListByUri($uri)
+    {
+        throw new Exception('Method not allowed');
+    }
 }

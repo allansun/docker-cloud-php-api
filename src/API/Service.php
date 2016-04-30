@@ -231,4 +231,15 @@ class Service extends AbstractApplicationAPI
             ]
         ));
     }
+
+    /**
+     * @param $uri
+     *
+     * @return GetListResponse
+     * @throws \DockerCloud\Exception
+     */
+    function getListByUri($uri)
+    {
+        return new GetListResponse($this->getClient()->request('GET', $uri));
+    }
 }

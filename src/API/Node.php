@@ -106,4 +106,15 @@ class Node extends AbstractInfrastructrueAPI
     {
         return new Model($this->getClient()->request('DELETE', $this->getAPINameSpace() . $uuid . '/'));
     }
+
+    /**
+     * @param $uri
+     *
+     * @return GetListResponse
+     * @throws \DockerCloud\Exception
+     */
+    function getListByUri($uri)
+    {
+        return new GetListResponse($this->getClient()->request('GET', $uri));
+    }
 }

@@ -5,6 +5,7 @@ namespace DockerCloud\API;
 
 
 use DockerCloud\Model\AbstractAuditModel;
+use DockerCloud\Model\Response\AbstractGetResponse;
 
 abstract class AbstractAuditAPI extends AbstractAPI
 {
@@ -16,4 +17,11 @@ abstract class AbstractAuditAPI extends AbstractAPI
      * @return AbstractAuditModel
      */
     abstract function getByUri($uri);
+
+    /**
+     * @param $uri
+     *
+     * @return AbstractGetResponse
+     */
+    abstract function getListByUri($uri);
 }

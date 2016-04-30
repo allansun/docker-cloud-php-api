@@ -7,6 +7,7 @@ namespace DockerCloud\Test\API;
 use DockerCloud\API\Provider as ProviderAPI;
 use DockerCloud\API\Region as API;
 use DockerCloud\Model\Region as Model;
+use DockerCloud\Model\Response\RegionGetListResponse;
 
 class RegionTest extends AbstractAPITest
 {
@@ -88,4 +89,10 @@ class RegionTest extends AbstractAPITest
         $this->assertInstanceOf(Model::class, $Model);
     }
 
+    public function testGetListByUri()
+    {
+        $this->mockGetListResponse(200, $this->getMockData());
+        $API = new API();
+        $this->assertInstanceOf(RegionGetListResponse::class, $API->getListByUri('mock_uri'));
+    }
 }

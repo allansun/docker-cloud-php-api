@@ -5,6 +5,7 @@ namespace DockerCloud\Test\API;
 
 
 use DockerCloud\API\Stack as API;
+use DockerCloud\Model\Response\StackGetListResponse;
 use DockerCloud\Model\Stack as Model;
 use Faker\Factory as FackerFactory;
 
@@ -190,11 +191,19 @@ class StackTest extends AbstractAPITest
         $this->assertEquals('test', $Model->getName());
     }
 
-    public function testFindByNameWithNoResult(){
+    public function testFindByNameWithNoResult()
+    {
         $this->mockGetListResponse(200, null);
 
-        $API   = new API();
+        $API = new API();
         $this->assertNull($API->findByName('not-exist'));
 
+    }
+
+    public function testGetListByUri()
+    {
+        $this->mockGetListResponse(200, $this->getMockData());
+        $API = new API();
+        $this->assertInstanceOf(StackGetListResponse::class, $API->getListByUri('mock_uri'));
     }
 }

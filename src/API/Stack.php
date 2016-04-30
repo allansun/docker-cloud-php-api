@@ -159,4 +159,15 @@ class Stack extends AbstractApplicationAPI
 
         return null;
     }
+
+    /**
+     * @param $uri
+     *
+     * @return GetListResponse
+     * @throws \DockerCloud\Exception
+     */
+    function getListByUri($uri)
+    {
+        return new GetListResponse($this->getClient()->request('GET', $uri));
+    }
 }

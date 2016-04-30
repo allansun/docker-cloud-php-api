@@ -9,6 +9,7 @@ use DockerCloud\Model\Response\MetaData;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
+use Zend\Json\Encoder;
 
 /**
  * Class AbstractAPITest
@@ -32,16 +33,16 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
     protected function mockResponse($status, $body)
     {
         if ($body instanceof AbstractModel) {
-            $body = \Zend\Json\Encoder::encode($body->getArrayCopy());
+            $body = Encoder::encode($body->getArrayCopy());
         }
 
         if (!is_string($body)) {
-            $body = \Zend\Json\Encoder::encode($body);
+            $body = Encoder::encode($body);
         }
 
         Client::getInstance()->setDefaultOption('handler',
             HandlerStack::create(new MockHandler([
-                new Response($status, ['Content-Type' => 'application/json'], $body)
+                new Response($status, ['Content-Type' => 'application/json'], $body),
             ]))
         );
 
@@ -51,10 +52,11 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
     /**
      * @param                                      $status
      * @param string|AbstractModel|AbstractModel[] $body
+     * @param null|MetaData                        $MetaData
      *
      * @return AbstractAPITest
      */
-    protected function mockGetListResponse($status, $body)
+    protected function mockGetListResponse($status = 200, $body = null, $MetaData = null)
     {
         if (is_string($body)) {
             $body = json_decode($body);
@@ -66,13 +68,15 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
             $body = [$body];
         }
 
-        $MetaData = new MetaData();
-        $MetaData->setLimit(25)
-            ->setTotalCount(count($body));
+        if (!$MetaData) {
+            $MetaData = new MetaData();
+            $MetaData->setLimit(25)
+                ->setTotalCount(count($body));
+        }
 
-        return $this->mockResponse($status, \Zend\Json\Encoder::encode([
+        return $this->mockResponse($status, Encoder::encode([
             'meta'    => $MetaData->getArrayCopy(),
-            'objects' => $body
+            'objects' => $body,
         ]));
     }
 

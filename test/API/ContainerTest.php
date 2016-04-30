@@ -6,6 +6,7 @@ namespace DockerCloud\Test\API;
 
 use DockerCloud\API\Container as API;
 use DockerCloud\Model\Container as Model;
+use DockerCloud\Model\Response\ContainerGetListResponse;
 
 class ContainerTest extends AbstractAPITest
 {
@@ -269,6 +270,7 @@ class ContainerTest extends AbstractAPITest
 JSON;
     }
 
+
     /**
      * @return Model
      */
@@ -398,5 +400,12 @@ JSON;
 
         $API = new API();
         $API->exec($Model->getUuid(), 'ls');
+    }
+
+    public function testGetListByUri()
+    {
+        $this->mockGetListResponse(200, $this->getMockData());
+        $API = new API();
+        $this->assertInstanceOf(ContainerGetListResponse::class, $API->getListByUri('mock_uri'));
     }
 }

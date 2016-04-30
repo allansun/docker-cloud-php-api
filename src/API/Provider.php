@@ -51,4 +51,14 @@ class Provider extends AbstractInfrastructrueAPI
         return new Model($this->getClient()->request('GET', $this->getAPINameSpace() . $name . '/'));
     }
 
+    /**
+     * @param $uri
+     *
+     * @return GetListResponse
+     * @throws \DockerCloud\Exception
+     */
+    function getListByUri($uri)
+    {
+        return new GetListResponse($this->getClient()->request('GET', $uri));
+    }
 }

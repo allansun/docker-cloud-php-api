@@ -5,6 +5,7 @@ namespace DockerCloud\API;
 
 
 use DockerCloud\Model\AbstractInfrastructrueModel;
+use DockerCloud\Model\Response\AbstractGetResponse;
 
 abstract class AbstractInfrastructrueAPI extends AbstractAPI
 {
@@ -16,4 +17,11 @@ abstract class AbstractInfrastructrueAPI extends AbstractAPI
      * @return AbstractInfrastructrueModel
      */
     abstract function getByUri($uri);
+
+    /**
+     * @param $uri
+     *
+     * @return AbstractGetResponse
+     */
+    abstract function getListByUri($uri);
 }

@@ -51,4 +51,13 @@ class EventTest extends AbstractAPITest
         $API = new API();
         $API->listen(true, true);
     }
+
+    public function testGetListByUri()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Method not allowed');
+
+        $API = new API();
+        $API->getList();
+    }
 }

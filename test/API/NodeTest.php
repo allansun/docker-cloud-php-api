@@ -6,6 +6,7 @@ namespace DockerCloud\Test\API;
 
 use DockerCloud\API\Node as API;
 use DockerCloud\Model\Node as Model;
+use DockerCloud\Model\Response\NodeGetListResponse;
 
 class NodeTest extends AbstractAPITest
 {
@@ -150,5 +151,12 @@ JSON;
         $API   = new API();
         $Model = $API->terminate($Model->getUuid());
         $this->assertInstanceOf(Model::class, $Model);
+    }
+
+    public function testGetListByUri()
+    {
+        $this->mockGetListResponse(200, $this->getMockData());
+        $API = new API();
+        $this->assertInstanceOf(NodeGetListResponse::class, $API->getListByUri('mock_uri'));
     }
 }

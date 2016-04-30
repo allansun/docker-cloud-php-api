@@ -97,4 +97,15 @@ class Action extends AbstractAuditAPI
     {
         return new Model($this->getClient()->request('POST', $this->getAPINameSpace() . $uuid . '/retry/'));
     }
+
+    /**
+     * @param $uri
+     *
+     * @return GetListResponse
+     * @throws \DockerCloud\Exception
+     */
+    function getListByUri($uri)
+    {
+        return new GetListResponse($this->getClient()->request('GET', $uri));
+    }
 }

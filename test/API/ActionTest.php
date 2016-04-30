@@ -6,6 +6,7 @@ namespace DockerCloud\Test\API;
 
 use DockerCloud\API\Action as API;
 use DockerCloud\Model\Action as Model;
+use DockerCloud\Model\Response\ActionGetListResponse;
 
 class ActionTest extends AbstractAPITest
 {
@@ -110,4 +111,10 @@ JSON;
         $this->assertInstanceOf(Model::class, $Model);
     }
 
+    public function testGetListByUri()
+    {
+        $this->mockGetListResponse(200, $this->getMockData());
+        $API = new API();
+        $this->assertInstanceOf(ActionGetListResponse::class, $API->getListByUri('mock_uri'));
+    }
 }

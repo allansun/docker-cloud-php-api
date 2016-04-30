@@ -54,4 +54,14 @@ class Region extends AbstractInfrastructrueAPI
             $this->getAPINameSpace() . $providerName . '/' . $name . '/'));
     }
 
+    /**
+     * @param $uri
+     *
+     * @return GetListResponse
+     * @throws \DockerCloud\Exception
+     */
+    function getListByUri($uri)
+    {
+        return new GetListResponse($this->getClient()->request('GET', $uri));
+    }
 }

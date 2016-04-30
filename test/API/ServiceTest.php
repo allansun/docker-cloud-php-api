@@ -5,6 +5,7 @@ namespace DockerCloud\Test\API;
 
 
 use DockerCloud\API\Service as API;
+use DockerCloud\Model\Response\ServiceGetListResponse;
 use DockerCloud\Model\Service as Model;
 use DockerCloud\Model\Stack;
 use Faker\Factory as FackerFactory;
@@ -369,7 +370,7 @@ JSON;
         $Stack->setResourceUri('some thing');
         $this->mockGetListResponse(200, $Model);
 
-        $API   = new API();
+        $API = new API();
 
         $Model = $API->findByName('test', $Stack);
         $this->assertInstanceOf(Model::class, $Model);
@@ -411,5 +412,12 @@ JSON;
         $Model->setTags(['unit-test-update']);
         $Model = $API->updateLinkedToService($Model);
         $this->assertInstanceOf(Model::class, $Model);
+    }
+
+    public function testGetListByUri()
+    {
+        $this->mockGetListResponse(200, $this->getMockData());
+        $API = new API();
+        $this->assertInstanceOf(ServiceGetListResponse::class, $API->getListByUri('mock_uri'));
     }
 }

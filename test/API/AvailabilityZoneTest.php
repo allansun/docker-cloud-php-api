@@ -5,6 +5,7 @@ namespace DockerCloud\Test\API;
 
 use DockerCloud\API\AvailabilityZone as API;
 use DockerCloud\Model\AvailabilityZone as Model;
+use DockerCloud\Model\Response\AvailabilityZoneGetListResponse;
 
 class AvailabilityZoneTest extends AbstractAPITest
 {
@@ -70,4 +71,10 @@ class AvailabilityZoneTest extends AbstractAPITest
         $this->assertInstanceOf(Model::class, $Model);
     }
 
+    public function testGetListByUri()
+    {
+        $this->mockGetListResponse(200, $this->getMockData());
+        $API = new API();
+        $this->assertInstanceOf(AvailabilityZoneGetListResponse::class, $API->getListByUri('mock_uri'));
+    }
 }

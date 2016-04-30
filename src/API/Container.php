@@ -120,8 +120,8 @@ class Container extends AbstractApplicationAPI
         $this->getClient()
             ->request('GET', $this->getAPINameSpace() . $uuid . '/exec/', [
                 'query' => [
-                    'command' => $command
-                ]
+                    'command' => $command,
+                ],
             ], $successCallback, $failCallback);
     }
 
@@ -134,5 +134,16 @@ class Container extends AbstractApplicationAPI
     public function terminate($uuid)
     {
         return new Model($this->getClient()->request('DELETE', $this->getAPINameSpace() . $uuid . '/'));
+    }
+
+    /**
+     * @param $uri
+     *
+     * @return GetListResponse
+     * @throws \DockerCloud\Exception
+     */    
+    function getListByUri($uri)
+    {
+        return new GetListResponse($this->getClient()->request('GET', $uri));
     }
 }

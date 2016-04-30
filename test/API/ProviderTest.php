@@ -6,6 +6,7 @@ namespace DockerCloud\Test\API;
 
 use DockerCloud\API\Provider as API;
 use DockerCloud\Model\Provider as Model;
+use DockerCloud\Model\Response\ProviderGetListResponse;
 
 class ProviderTest extends AbstractAPITest
 {
@@ -63,4 +64,10 @@ class ProviderTest extends AbstractAPITest
         $this->assertInstanceOf(Model::class, $Model);
     }
 
+    public function testGetListByUri()
+    {
+        $this->mockGetListResponse(200, $this->getMockData());
+        $API = new API();
+        $this->assertInstanceOf(ProviderGetListResponse::class, $API->getListByUri('mock_uri'));
+    }
 }

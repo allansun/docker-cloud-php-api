@@ -55,4 +55,14 @@ class AvailabilityZone extends AbstractInfrastructrueAPI
         ));
     }
 
+    /**
+     * @param $uri
+     *
+     * @return GetListResponse
+     * @throws \DockerCloud\Exception
+     */
+    function getListByUri($uri)
+    {
+        return new GetListResponse($this->getClient()->request('GET', $uri));
+    }
 }
