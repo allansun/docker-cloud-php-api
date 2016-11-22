@@ -125,21 +125,21 @@ class Service extends AbstractApplicationModel
     /**
      * The date and time of the last start operation on the service (if applicable, null otherwise)
      *
-     * @var string| null
+     * @var string|null
      */
     protected $started_datetime;
 
     /**
      * The date and time of the last stop operation on the service (if applicable, null otherwise)
      *
-     * @var string| null
+     * @var string|null
      */
     protected $stopped_datetime;
 
     /**
      * The date and time of the terminate operation on the service (if applicable, null otherwise)
      *
-     * @var string| null
+     * @var string|null
      */
     protected $destroyed_datetime;
 

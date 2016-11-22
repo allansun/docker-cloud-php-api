@@ -168,8 +168,7 @@ class ServiceTest extends AbstractAPITest
     "roles": ["global"],
     "run_command": "/run-wordpress.sh",
     "running_num_containers": 1,
-    "security_opt": [
-    ],
+    "security_opt": ["custom"],
     "sequential_deployment": false,
     "started_datetime": "Mon, 13 Oct 2014 11:01:43 +0000",
     "state": "Partly running",

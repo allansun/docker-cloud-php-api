@@ -150,7 +150,7 @@ class Node extends AbstractApplicationModel
     /**
      * The date and time of the terminate operation on the node (if applicable, null otherwise)
      *
-     * @var string| null
+     * @var string|null
      */
     protected $destroyed_datetime;
 

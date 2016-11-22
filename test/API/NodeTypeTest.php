@@ -17,7 +17,7 @@ class NodeTypeTest extends AbstractAPITest
     static public function getMockData()
     {
         return '{
-        "availability_zones": [],
+        "availability_zones": ["custom"],
         "available": true,
         "label": "1GB",
         "name": "1gb",
