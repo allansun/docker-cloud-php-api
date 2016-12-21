@@ -87,7 +87,7 @@ class NodeCluster extends AbstractInfrastructrueModel
     /**
      * The date and time when this node cluster was terminated (if applicable)
      *
-     * @var string
+     * @var string|null
      */
     protected $destroyed_datetime;
     /**

@@ -11,6 +11,8 @@ use DockerCloud\Model\AbstractModel;
 use DockerCloud\Test\Utility\ClassFinder;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Reflection\StaticReflectionParser;
+use phpDocumentor\Reflection\DocBlock\Tags\Var_;
+use phpDocumentor\Reflection\DocBlockFactory;
 
 abstract class AbstractModelTest extends \PHPUnit_Framework_TestCase
 {
@@ -50,50 +52,53 @@ abstract class AbstractModelTest extends \PHPUnit_Framework_TestCase
 
         foreach ($ModelReflection->getProperties(\ReflectionProperty::IS_PROTECTED) as $ReflectionProperty) {
             // Parse @var tag
-            $DockBlock = new \phpDocumentor\Reflection\DocBlock($ReflectionProperty->getDocComment());
+            $DockBlock = (DocBlockFactory::createInstance())->create($ReflectionProperty->getDocComment());
             $this->assertTrue($DockBlock->hasTag('var'));
+            /**
+             * @var Var_ $VarTag
+             */
             $VarTag   = $DockBlock->getTagsByName('var')[0];
-            $varTypes = explode('|', str_replace(' ', '', substr($VarTag, 5)));
+            $varTypes = explode('|', $VarTag->getType()->__toString());
             //echo $VarTag . PHP_EOL;
 
-            // Get value by using getter method
-            $getterMethodName = $Transformer->transform($ReflectionProperty->getName());
-            if ('bool' == $VarTag->getContent() || 'boolean' == $VarTag->getContent()) {
-                $getterMethodName = 'is' . $getterMethodName;
-            } else {
-                $getterMethodName = 'get' . $getterMethodName;
-            }
-
-            $value = $Model->$getterMethodName();
-            if (strpos($VarTag->getContent(), '[]') && is_array($value)) {
-                $value = array_pop($value);
-            }
-
-            // If there's no actual value we cannot really validate it...
-            if (null === $value) {
-                continue;
-            }
-
-            // Validate value against @var type
-            $foundMatchVarType = false;
+            $foundMatchVarTypeCount = 0;
             foreach ($varTypes as $varType) {
-                $varType           = str_replace('[]', '', $varType);
-                $foundMatchVarType = $this->validateInternalType($varType, $value);
-                if (null !== $foundMatchVarType) {
-                    break;
+                // Get value by using getter method
+                $getterMethodName = $Transformer->transform($ReflectionProperty->getName());
+                if ('bool' == $varType || 'boolean' == $varType) {
+                    $getterMethodName = 'is' . $getterMethodName;
+                } else {
+                    $getterMethodName = 'get' . $getterMethodName;
                 }
-                $foundMatchVarType = $this->validateImportedType($varType, $value, $useStatements);
-                if (null !== $foundMatchVarType) {
-                    break;
+
+                if (!method_exists($Model, $getterMethodName)) {
+                    continue;
+                }
+
+                $value = $Model->$getterMethodName();
+                if (strpos($varType, '[]') && is_array($value)) {
+                    $value = array_pop($value);
+                }
+
+                // If there's no actual value we cannot really validate it...
+                $varType = str_replace('[]', '', $varType);
+                if (strpos($varType, '\\') === 0) {
+                    $varType = substr($varType, 1);
+                }
+                $foundMatchVarType = $this->validateInternalType($varType, $value);
+
+                if (is_null($foundMatchVarType)) {
+                    $foundMatchVarType = $this->validateImportedType($varType, $value, $useStatements);
+                }
+
+                if ($foundMatchVarType) {
+                    $foundMatchVarTypeCount++;
                 }
             }
-            $this->assertTrue($foundMatchVarType,
-                sprintf('[%s] value [%s] is expected type of [%s]',
-                    $ReflectionProperty->getName(),
-                    print_r($value, true),
-                    $VarTag->getContent()
-                )
-            );
+
+            self::assertTrue($foundMatchVarTypeCount > 0, sprintf("[%s] haven't getter method.",
+                $ReflectionProperty->getName()
+            ));
         }
     }
 
@@ -149,6 +154,8 @@ abstract class AbstractModelTest extends \PHPUnit_Framework_TestCase
         $varType = strtolower($varType);
         if (array_key_exists($varType, $useStatements)) {
             return $value instanceof $useStatements[$varType];
+        } elseif ($value instanceof $varType) {
+            return true;
         }
 
         return null;

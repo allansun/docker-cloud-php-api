@@ -85,7 +85,13 @@ class Client
 
             if (!($successCallback instanceof \Closure)) {
                 $successCallback = function ($response) {
-                    Logger::getInstance()->info(json_decode($response)->output);
+                    $info = json_decode($response);
+                    if (property_exists($info, 'output')) {
+                        Logger::getInstance()->info(json_decode($response)->output);
+                    } elseif ($info->type == 'error') {
+                        // output error info
+                        Logger::getInstance()->info($info->message);
+                    }
                 };
             }
             if (!($failCallback instanceof \Closure)) {

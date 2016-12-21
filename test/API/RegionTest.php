@@ -17,7 +17,7 @@ class RegionTest extends AbstractAPITest
     static public function getMockData()
     {
         return '{
-        "availability_zones": [],
+        "availability_zones": ["custom"],
         "available": true,
         "label": "Amsterdam 2",
         "name": "ams2",
