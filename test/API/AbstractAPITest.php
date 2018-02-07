@@ -20,7 +20,7 @@ abstract class AbstractAPITest extends \PHPUnit_Framework_TestCase
 {
     static public function setUpBeforeClass()
     {
-        Client::configure(getenv('USERNAME'), getenv('APIKEY'));
+        Client::configure(getenv('USERNAME'), getenv('APIKEY'), getenv('ORGANISATION'));
     }
 
     /**
