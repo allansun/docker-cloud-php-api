@@ -10,6 +10,7 @@
     <php>
         <env name="USERNAME" value=""/>
         <env name="APIKEY" value=""/>
+        <env name="ORGANISATION" value=""/>
         <env name="DEBUG" value="false"/>
     </php>
     <testsuites>

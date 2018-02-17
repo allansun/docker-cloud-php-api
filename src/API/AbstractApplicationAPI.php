@@ -17,6 +17,15 @@ abstract class AbstractApplicationAPI extends AbstractAPI
 {
     protected $api_prifix = '/api/app/v1';
 
+    public function __construct()
+    {
+        parent::__construct();
+
+        if($this->getClient()->getNamespace()){
+            $this->api_prifix.= '/' . $this->getClient()->getNamespace();
+        }
+    }
+
     /**
      * @param AbstractApplicationModel $Model
      * @param                          $state

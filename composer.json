@@ -26,7 +26,7 @@
     "zendframework/zend-serializer": "~2",
     "zendframework/zend-eventmanager": "~2 | ~3",
     "zendframework/zend-uri": "~2",
-    "allansun/websocket": "dev-master"
+    "allansun/websocket": "^1.2.0"
   },
   "require-dev": {
     "phpunit/phpunit": "~5.0",

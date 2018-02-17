@@ -23,13 +23,16 @@ class Client
      */
     private $defaultOptions = [];
 
+    private $namespace = null;
+
     /**
      * Client constructor.
      *
      * @param $username
      * @param $apiKey
+     * @param $namespace String Namespace for using an organisation with docker cloud
      */
-    private function __construct($username, $apiKey)
+    private function __construct($username, $apiKey, $namespace = null)
     {
         Json::$useBuiltinEncoderDecoder = true;
 
@@ -39,6 +42,8 @@ class Client
                 'Accepts' => 'application/json'
             ]
         ];
+
+        $this->namespace = $namespace;
     }
 
     /**
@@ -115,12 +120,13 @@ class Client
     /**
      * @param $username
      * @param $apiKey
+     * @param $namespace String Namespace for using an organisation with docker cloud
      *
      * @return Client
      */
-    public static function configure($username, $apiKey)
+    public static function configure($username, $apiKey, $namespace = null)
     {
-        self::$instance = new Client($username, $apiKey);
+        self::$instance = new Client($username, $apiKey, $namespace);
 
         return self::$instance;
     }
@@ -149,5 +155,13 @@ class Client
         $this->defaultOptions[$option] = $value;
 
         return $this;
+    }
+
+    /**
+     * @return null|String
+     */
+    public function getNamespace()
+    {
+        return $this->namespace;
     }
 }

@@ -23,6 +23,10 @@ class ServiceTrigger extends AbstractAPI
     {
         parent::__construct();
 
+        if($this->getClient()->getNamespace()){
+            $this->api_prifix = '/api/app/v1/' . $this->getClient()->getNamespace() . '/service/';
+        }
+
         $this->uuid = $uuid;
     }
 
